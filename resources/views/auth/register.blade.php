@@ -62,6 +62,60 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="phone" class="col-md-4 control-label">Phone</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control" name="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address" class="col-md-4 control-label">Address</label>
+
+                            <div class="col-md-6">
+                                <textarea id="address" type="text" class="form-control" name="address" rows="3" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birthday" class="col-md-4 control-label">Birthday</label>
+
+                            <div class="col-md-6">
+                                <input id="birthday" type="date" class="form-control" name="birthday" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Gender</label>
+
+                            <div class="col-md-6 radio">
+                                <label>
+                                    <input type="radio" name="gender" required checked>Male
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" required>Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profile_pic" class="col-md-4 control-label">Photo</label>
+
+                            <div class="col-md-6">
+                                <input id="profile_pic" type="file" name="profile_pic" required>
+                        </div>
+                        </div>
+
+                        <div class="checkbox">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                                <label class="text-center">
+                                    <input id="agreement" type="checkbox" name="agreement" required>By registering to this website, I agree term and condition
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="padding-top: 20px">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register

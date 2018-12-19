@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use DateTime;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -41,6 +42,7 @@ class RegisterController extends Controller
 
     /**
      * Get a validator for an incoming registration request.
+     * @author Yansen
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -51,11 +53,21 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required|numeric',
+            'gender' => 'required',
+            'address' => 'required|regex:(street)',
+            'profile_picture' => 'required|regex:(street)',
+            'birthday' => 'required|date|before:'
+                . (date_format(new DateTime(), 'Y') - 12)
+                . '-'
+                . date_format(new DateTime(), 'm-d'),
+            'agreement' => 'required',
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
+     * @author Yansen
      *
      * @param  array  $data
      * @return \App\User
@@ -66,6 +78,11 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'phone' => $data['phonne'],
+            'gender' => $data['gender'],
+            'address' => $data['address'],
+            'profile_picture' => $data['profile_picture'],
+            'birthday' => $data['birthday'],
         ]);
     }
 }

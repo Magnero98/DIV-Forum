@@ -8,7 +8,7 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -65,7 +65,7 @@
                             <label for="phone" class="col-md-4 control-label">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone" required>
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@
                             <label for="address" class="col-md-4 control-label">Address</label>
 
                             <div class="col-md-6">
-                                <textarea id="address" type="text" class="form-control" name="address" rows="3" required></textarea>
+                                <textarea id="address" type="text" class="form-control" name="address" rows="3" required>{{ old('address') }}</textarea>
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@
                             <label for="birthday" class="col-md-4 control-label">Birthday</label>
 
                             <div class="col-md-6">
-                                <input id="birthday" type="date" class="form-control" name="birthday" required>
+                                <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
                             </div>
                         </div>
 
@@ -99,10 +99,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="profile_pic" class="col-md-4 control-label">Photo</label>
+                            <label for="picture" class="col-md-4 control-label">Photo</label>
 
                             <div class="col-md-6">
-                                <input id="profile_pic" type="file" name="profile_pic" required>
+                                <input id="picture" type="file" name="picture" required>
                         </div>
                         </div>
 
@@ -123,6 +123,12 @@
                             </div>
                         </div>
                     </form>
+                </div>
+
+                <div class="panel-footer">
+                    @foreach($errors->all() as $error)
+                        <p>{{$error}}</p>
+                    @endforeach
                 </div>
             </div>
         </div>

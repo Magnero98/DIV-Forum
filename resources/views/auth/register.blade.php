@@ -61,31 +61,50 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
                             <label for="phone" class="col-md-4 control-label">Phone</label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
+
+                                @if ($errors->has('phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
                             </div>
+
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
                             <label for="address" class="col-md-4 control-label">Address</label>
 
                             <div class="col-md-6">
                                 <textarea id="address" type="text" class="form-control" name="address" rows="3" required>{{ old('address') }}</textarea>
+
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('birthday') ? ' has-error' : '' }}">
                             <label for="birthday" class="col-md-4 control-label">Birthday</label>
 
                             <div class="col-md-6">
                                 <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
+
+                                @if ($errors->has('birthday'))
+                                    <span class="help-block">
+                                        <strong>Must be older than 12 years old.</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Gender</label>
 
                             <div class="col-md-6 radio">
@@ -96,17 +115,29 @@
                                     <input type="radio" name="gender" required>Female
                                 </label>
                             </div>
+
+                            @if ($errors->has('gender'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('gender') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('picture') ? ' has-error' : '' }}">
                             <label for="picture" class="col-md-4 control-label">Photo</label>
 
                             <div class="col-md-6">
                                 <input id="picture" type="file" name="picture" required>
-                        </div>
+
+                                @if ($errors->has('picture'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('picture') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
 
-                        <div class="checkbox">
+                        <div class="checkbox {{ $errors->has('password') ? ' has-error' : '' }}">
                             <div class="col-md-3"></div>
                             <div class="col-md-9">
                                 <label class="text-center">
@@ -123,12 +154,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-
-                <div class="panel-footer">
-                    @foreach($errors->all() as $error)
-                        <p>{{$error}}</p>
-                    @endforeach
                 </div>
             </div>
         </div>

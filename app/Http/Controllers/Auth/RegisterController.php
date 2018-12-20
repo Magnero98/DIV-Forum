@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use DateTime;
 use App\User;
 use App\Http\Controllers\Controller;
+//use http\Env\Request;
+use Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -54,13 +56,13 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'phone' => 'required|numeric',
-            'gender' => 'required',
             'address' => 'required|regex:(street)',
-            'profile_picture' => 'required|regex:(street)',
             'birthday' => 'required|date|before:'
                 . (date_format(new DateTime(), 'Y') - 12)
                 . '-'
                 . date_format(new DateTime(), 'm-d'),
+            'gender' => 'required',
+            'picture' => 'required|image',
             'agreement' => 'required',
         ]);
     }
@@ -74,15 +76,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $file = request()->file('picture');
+        $fileName = "no file";
+
+        //dd($data);
+
+        if($file != null)
+        {
+            $filePath = 'uploads/profile_pictures';
+            $fileName = $file->getFilename();
+            $file->move($filePath, $fileName);
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'phone' => $data['phonne'],
+            'phone' => $data['phone'],
             'gender' => $data['gender'],
             'address' => $data['address'],
-            'profile_picture' => $data['profile_picture'],
+            'profile_picture' => $fileName,
             'birthday' => $data['birthday'],
+            'good_popularity' => 0,
+            'bad_popularity' => 0,
         ]);
     }
 }

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('birthday');
             $table->string('gender',191);
             $table->string('address', 191);
-            $table->string('profile_pic', 191);
+            $table->string('profile_picture', 191);
             $table->integer('good_popularity');
             $table->integer('bad_popularity');
 

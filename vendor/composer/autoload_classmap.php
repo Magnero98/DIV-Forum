@@ -7,7 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Domains\\DomainModels\\DomainModel' => $baseDir . '/app/Domains/DomainModels/DomainModel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\AsalController' => $baseDir . '/app/Http/Controllers/AsalController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -25,6 +27,8 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Repository\\Repositories\\Repository' => $baseDir . '/app/Repository/Repositories/Repository.php',
+    'App\\Repository\\Repositories\\UserRepository' => $baseDir . '/app/Repository/Repositories/UserRepository.php',
     'App\\Role' => $baseDir . '/app/Repository/DataModels/Role.php',
     'App\\User' => $baseDir . '/app/Repository/DataModels/User.php',
     'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',

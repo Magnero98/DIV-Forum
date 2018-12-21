@@ -317,7 +317,9 @@ class ComposerStaticInit6755efa733219b31574108a56d6aa9aa
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Domains\\DomainModels\\DomainModel' => __DIR__ . '/../..' . '/app/Domains/DomainModels/DomainModel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AsalController' => __DIR__ . '/../..' . '/app/Http/Controllers/AsalController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -335,6 +337,8 @@ class ComposerStaticInit6755efa733219b31574108a56d6aa9aa
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Repository\\Repositories\\Repository' => __DIR__ . '/../..' . '/app/Repository/Repositories/Repository.php',
+        'App\\Repository\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/Repository/Repositories/UserRepository.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Repository/DataModels/Role.php',
         'App\\User' => __DIR__ . '/../..' . '/app/Repository/DataModels/User.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',

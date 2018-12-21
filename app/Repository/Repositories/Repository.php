@@ -34,7 +34,7 @@ interface Repository
      * @author Yansen
      *
      * @param DomainModel $model
-     * @return void
+     * @return Repository/DataModels/User
      */
     public function create(DomainModel $model);
 
@@ -44,7 +44,7 @@ interface Repository
      *
      * @param DomainModel $model
      * @param Integer $id
-     * @return void
+     * @return Boolean
      */
     public function update(DomainModel $model, $id);
 
@@ -53,7 +53,7 @@ interface Repository
      * @author Yansen
      *
      * @param Integer $id
-     * @return void
+     * @return Boolean
      */
     public function delete($id);
 

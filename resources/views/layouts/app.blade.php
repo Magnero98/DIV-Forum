@@ -63,6 +63,11 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li>
+                                        <a href="{{ url('inbox') }}">
+                                            Inbox
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endguest

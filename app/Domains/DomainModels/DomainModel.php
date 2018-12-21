@@ -11,5 +11,5 @@ namespace App\Domains\DomainModels;
 
 abstract class DomainModel
 {
-
+    protected $id;
 }

@@ -109,10 +109,10 @@
 
                             <div class="col-md-6 radio">
                                 <label>
-                                    <input type="radio" name="gender" required checked>Male
+                                    <input type="radio" name="gender" value="Male" required checked>Male
                                 </label>
                                 <label>
-                                    <input type="radio" name="gender" required>Female
+                                    <input type="radio" name="gender" value="Female" required>Female
                                 </label>
                             </div>
 

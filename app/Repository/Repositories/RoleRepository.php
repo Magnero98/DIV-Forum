@@ -1,22 +1,21 @@
-<?php /** @noinspection PhpUndefinedNamespaceInspection */
-
+<?php
 /**
  * Created by PhpStorm.
- * UserDomainModel: UserDomainModel
- * Date: 12/21/2018
- * Time: 9:07 AM
+ * User: User
+ * Date: 12/22/2018
+ * Time: 2:53 PM
  */
 
 namespace App\Repository\Repositories;
 
-use App\Repository\DataModels\User;
+
 use App\Domains\DomainModels\DomainModel;
 
-class UserRepository implements Repository
+class RoleRepository implements Repository
 {
 
     /**
-     * Retrieve all data from Database with pagination default per page = 10
+     * Retrieve all data from Database with pagination default perpage = 10
      * @author Yansen
      *
      * @param Integer $perPage = 10
@@ -24,20 +23,18 @@ class UserRepository implements Repository
      */
     public function all($perPage = 10)
     {
-        return User::where('id', '!=', 0)
-            ->paginate($perPage);
+        // TODO: Implement all() method.
     }
 
     /**
      * Retrieve data from Database with specified id
      * @author Yansen
      *
-     * @param Integer $id
-     * @return User
+     * @return Repository/DataModels/UserDomainModel
      */
     public function find($id)
     {
-        return User::find($id);
+        // TODO: Implement find() method.
     }
 
     /**
@@ -45,25 +42,11 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param DomainModel $model
-     * @return \Repository\Repositories\UserRepository
+     * @return Repository/DataModels/UserDomainModel
      */
     public function create(DomainModel $model)
     {
-        return User::create([
-            'name' => $model->getName(),
-            'email' => $model->getEmail(),
-            'password' => bcrypt($model->getPassword()),
-            'phone' => $model->getPhone(),
-            'gender' => $model->getGender(),
-            'address' => $model->getAddress(),
-            'profile_picture' => $model
-                ->getProfilePicture()
-                ->getImageFile()
-                ->getFilename(),
-            'birthday' => $model->getBirthday(),
-            'good_popularity' => $model->getPopularity()->getGoodPopularity(),
-            'bad_popularity' => $model->getPopularity()->getBadPopularity(),
-        ]);
+        // TODO: Implement create() method.
     }
 
     /**
@@ -90,5 +73,4 @@ class UserRepository implements Repository
     {
         // TODO: Implement delete() method.
     }
-
 }

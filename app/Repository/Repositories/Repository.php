@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: User
+ * UserDomainModel: UserDomainModel
  * Date: 12/21/2018
  * Time: 10:02 AM
  */
@@ -17,7 +17,7 @@ interface Repository
      * @author Yansen
      *
      * @param Integer $perPage = 10
-     * @return Collection of Repository/DataModels/User
+     * @return Collection of Repository/DataModels/UserDomainModel
      */
     public function all($perPage = 10);
 
@@ -25,7 +25,7 @@ interface Repository
      * Retrieve data from Database with specified id
      * @author Yansen
      *
-     * @return Repository/DataModels/User
+     * @return Repository/DataModels/UserDomainModel
      */
     public function find($id);
 
@@ -34,7 +34,7 @@ interface Repository
      * @author Yansen
      *
      * @param DomainModel $model
-     * @return Repository/DataModels/User
+     * @return Repository/DataModels/UserDomainModel
      */
     public function create(DomainModel $model);
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: User
+ * UserDomainModel: UserDomainModel
  * Date: 12/21/2018
  * Time: 8:32 AM
  */

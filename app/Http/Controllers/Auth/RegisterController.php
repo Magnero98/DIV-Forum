@@ -1,11 +1,13 @@
-<?php
+<?php /** @noinspection PhpUndefinedNamespaceInspection */
+
+/** @noinspection PhpUndefinedNamespaceInspection */
 
 namespace App\Http\Controllers\Auth;
 
 use DateTime;
-use App\User;
+use App\Domains\DomainModels\UserDomainModel;
 use App\Http\Controllers\Controller;
-//use http\Env\Request;
+
 use Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -71,34 +73,12 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      * @author Yansen
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     * @return App\Repository\DataModels\User
      */
     protected function create(array $data)
     {
-        $file = request()->file('picture');
-        $fileName = "no file";
-
-        //dd($data);
-
-        if($file != null)
-        {
-            $filePath = 'uploads/profile_pictures';
-            $fileName = $file->getFilename();
-            $file->move($filePath, $fileName);
-        }
-
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'phone' => $data['phone'],
-            'gender' => $data['gender'],
-            'address' => $data['address'],
-            'profile_picture' => $fileName,
-            'birthday' => $data['birthday'],
-            'good_popularity' => 0,
-            'bad_popularity' => 0,
-        ]);
+        $user = UserDomainModel::createUserFromArray($data);
+        return $user->addUser();
     }
 }

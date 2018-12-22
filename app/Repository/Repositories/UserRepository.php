@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpUndefinedNamespaceInspection */
+
 /**
  * Created by PhpStorm.
  * UserDomainModel: UserDomainModel
@@ -8,14 +9,14 @@
 
 namespace App\Repository\Repositories;
 
-use App\User;
+use App\Repository\DataModels\User;
 use App\Domains\DomainModels\DomainModel;
 
 class UserRepository implements Repository
 {
 
     /**
-     * Retrieve all data from Database with pagination default perpage = 10
+     * Retrieve all data from Database with pagination default per page = 10
      * @author Yansen
      *
      * @param Integer $perPage = 10
@@ -31,7 +32,8 @@ class UserRepository implements Repository
      * Retrieve data from Database with specified id
      * @author Yansen
      *
-     * @return Repository/DataModels/UserDomainModel
+     * @param Integer $id
+     * @return User
      */
     public function find($id)
     {
@@ -43,14 +45,14 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param DomainModel $model
-     * @return User
+     * @return \Repository\Repositories\UserRepository
      */
     public function create(DomainModel $model)
     {
         return User::create([
             'name' => $model->getName(),
             'email' => $model->getEmail(),
-            'password' => $model->getPassword(),
+            'password' => bcrypt($model->getPassword()),
             'phone' => $model->getPhone(),
             'gender' => $model->getGender(),
             'address' => $model->getAddress(),

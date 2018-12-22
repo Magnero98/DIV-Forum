@@ -59,7 +59,6 @@ class UserRepository implements Repository
             'address' => $model->getAddress(),
             'profile_picture' => $model
                 ->getProfilePicture()
-                ->getImageFile()
                 ->getFilename(),
             'birthday' => $model->getBirthday(),
             'good_popularity' => $model->getPopularity()->getGoodPopularity(),

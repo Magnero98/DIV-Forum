@@ -50,6 +50,7 @@ class UserRepository implements Repository
     public function create(DomainModel $model)
     {
         return User::create([
+            'role_id' => $model->getRoleId(),
             'name' => $model->getName(),
             'email' => $model->getEmail(),
             'password' => bcrypt($model->getPassword()),

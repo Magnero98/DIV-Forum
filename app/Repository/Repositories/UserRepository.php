@@ -1,15 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: User
+ * UserDomainModel: UserDomainModel
  * Date: 12/21/2018
  * Time: 9:07 AM
  */
 
 namespace App\Repository\Repositories;
 
-use App\Domains\DomainModels\DomainModel;
 use App\User;
+use App\Domains\DomainModels\DomainModel;
 
 class UserRepository implements Repository
 {
@@ -19,7 +19,7 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param Integer $perPage = 10
-     * @return Collection of Repository/DataModels/User
+     * @return Collection of Repository/DataModels/UserDomainModel
      */
     public function all($perPage = 10)
     {
@@ -31,11 +31,11 @@ class UserRepository implements Repository
      * Retrieve data from Database with specified id
      * @author Yansen
      *
-     * @return Repository/DataModels/User
+     * @return Repository/DataModels/UserDomainModel
      */
     public function find($id)
     {
-        // TODO: Implement find() method.
+        return User::find($id);
     }
 
     /**
@@ -43,11 +43,25 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param DomainModel $model
-     * @return Repository/DataModels/User
+     * @return User
      */
     public function create(DomainModel $model)
     {
-        // TODO: Implement create() method.
+        return User::create([
+            'name' => $model->getName(),
+            'email' => $model->getEmail(),
+            'password' => $model->getPassword(),
+            'phone' => $model->getPhone(),
+            'gender' => $model->getGender(),
+            'address' => $model->getAddress(),
+            'profile_picture' => $model
+                ->getProfilePicture()
+                ->getImageFile()
+                ->getFilename(),
+            'birthday' => $model->getBirthday(),
+            'good_popularity' => $model->getPopularity()->getGoodPopularity(),
+            'bad_popularity' => $model->getPopularity()->getBadPopularity(),
+        ]);
     }
 
     /**

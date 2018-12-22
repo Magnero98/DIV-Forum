@@ -2,6 +2,7 @@
 
 namespace Illuminate\Auth;
 
+use App\Domains\DomainModels\UserDomainModel;
 use RuntimeException;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
@@ -421,6 +422,9 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
         // any listeners will hook into the authentication events and run actions
         // based on the login and logout events fired from the guard instances.
         $this->fireLoginEvent($user, $remember);
+
+        $userDomain = UserDomainModel::createUserFromUserDataModel($user);
+        $userDomain->saveUserToSession();
 
         $this->setUser($user);
     }

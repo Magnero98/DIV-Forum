@@ -11,14 +11,14 @@ namespace App\Domains\DomainModels;
 
 class ProfilePictureDomainModel
 {
-    protected $imageFile;
+    protected $filename;
 
     /**
      * Properties GETTER
      * @author Yansen
      *
      */
-    public function getImageFile()	{ return $this->imageFile; }
+    public function getFileName()	{ return $this->filename; }
 
 
     /**
@@ -26,9 +26,9 @@ class ProfilePictureDomainModel
      * @author Yansen
      *
      */
-    protected function setImageFile($imageFile)
+    protected function setFilename($filename)
     {
-        $this->imageFile = $imageFile;
+        $this->filename = $filename;
         return $this;
     }
 
@@ -60,20 +60,21 @@ class ProfilePictureDomainModel
     public function getImagePath()
     {
         return $this->getImageDirectory()
-            . $this->imageFile->getFilename();
+            . $this->getFilename();
     }
 
 
     /**
-     * Move image file to specific path
+     * Move image file to public directory
      * @author Yansen
      *
-     * @param String
+     * @param array $file
+     * @param String $path
      * @return void
      */
-    protected function moveTo($path)
+    protected function moveToPublicDirectory($file, $path)
     {
-        $this->imageFile->move($path, $this->imageFile->getFilename());
+        $file->move($path, $file->getFilename());
     }
 
 
@@ -82,14 +83,35 @@ class ProfilePictureDomainModel
      * and save it to public/uploads/images
      * @author Yansen
      *
-     * @param array
+     * @param array $file
      * @return ProfilePictureDomainModel
      */
     public static function createProfilePictureFromFile($file)
     {
         $profilePicture = new ProfilePictureDomainModel();
-        $profilePicture->setImageFile($file);
-        $profilePicture->moveTo($profilePicture->getImageDirectory());
+
+        $profilePicture->setFilename($file->getFilename());
+
+        $profilePicture->moveToPublicDirectory(
+            $file,
+            $profilePicture->getImageDirectory());
+
+        return $profilePicture;
+    }
+
+    /**
+     * Factory method to create Profile Picture
+     * from filename
+     * @author Yansen
+     *
+     * @param String $filename
+     * @return ProfilePictureDomainModel
+     */
+    public static function createProfilePicture($filename)
+    {
+        $profilePicture = new ProfilePictureDomainModel();
+
+        $profilePicture->setFilename($filename);
 
         return $profilePicture;
     }

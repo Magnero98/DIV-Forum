@@ -12,6 +12,7 @@ namespace App\Domains\DomainModels;
 use App\Repository\DataModels\User;
 use App\Repository\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class UserDomainModel extends DomainModel
 {
@@ -24,6 +25,10 @@ class UserDomainModel extends DomainModel
     protected $gender;
     protected $address;
     protected $birthday;
+    protected $createdAt;
+    protected $updatedAt;
+
+    //TODO create GETTER and SETTER for createdAt and updatedAt field
 
     /**
      * UserDomainModel popularity
@@ -126,11 +131,11 @@ class UserDomainModel extends DomainModel
      * Add new user to the database and save user profile picture
      * @author Yansen
      *
-     * @param Integer $userId
+     * @return void
      */
-    protected function saveUserToSession()
+    public function saveUserToSession()
     {
-        session(['User' => $this]);
+        Session::put('User', $this);
     }
 
 
@@ -138,7 +143,6 @@ class UserDomainModel extends DomainModel
      * Add new user to the database and save user to session
      * @author Yansen
      *
-     * @param Integer $userId
      * @return App\Repository\DataModels\User
      */
     public function addUser()
@@ -146,7 +150,7 @@ class UserDomainModel extends DomainModel
         $userDataModel = $this->userRepository->create($this);
 
         $this->setId($userDataModel->id);
-        $this->saveUserToSession();
+        //$this->saveUserToSession();
 
         return $userDataModel;
     }
@@ -156,7 +160,6 @@ class UserDomainModel extends DomainModel
      * Save updated user to the database
      * @author Yansen
      *
-     * @param Integer $userId
      * @return App\Repository\DataModels\User
      */
     public function editUser()
@@ -172,7 +175,7 @@ class UserDomainModel extends DomainModel
      * @param Integer $userId
      * @return void
      */
-    public static function deleteUser()
+    public static function deleteUser($userId)
     {
 
     }
@@ -190,18 +193,61 @@ class UserDomainModel extends DomainModel
         $user = new UserDomainModel();
 
         $user->setRoleId(2)
-            ->setPopularity(UserPopularityDomainModel::createUserPopularity())
             ->setName($data['name'])
             ->setEmail($data['email'])
             ->setPassword($data['password'])
             ->setPhone($data['phone'])
             ->setGender($data['gender'])
             ->setAddress($data['address'])
+            ->setBirthday($data['birthday'])
+            ->setPopularity(UserPopularityDomainModel::createUserPopularity())
             ->setProfilePicture(
-                ProfilePictureDomainModel::createProfilePictureFromFile($data['picture']))
-            ->setBirthday($data['birthday']);
+                ProfilePictureDomainModel::createProfilePictureFromFile($data['picture']));
 
         return $user;
+    }
+
+
+    /**
+     * Factory Method to create UserDomainModel from array of Data
+     * @author Yansen
+     *
+     * @param Repository/DataModels/User $model
+     * @return UserDomainModel
+     */
+    public static function createUserFromUserDataModel(User $model)
+    {
+        $user = new UserDomainModel();
+
+        $user->setId($model->id)
+            ->setRoleId($model->role_id)
+            ->setName($model->name)
+            ->setEmail($model->email)
+            ->setPassword($model->password)
+            ->setPhone($model->phone)
+            ->setGender($model->gender)
+            ->setAddress($model->address)
+            ->setBirthday($model->birthday)
+            ->setPopularity(
+                UserPopularityDomainModel::createUserPopularity(
+                    $model->goodPopularity,
+                    $model->badPopularity))
+            ->setProfilePicture(
+                ProfilePictureDomainModel::createProfilePicture(
+                    $model->profile_picture));
+
+        return $user;
+    }
+
+    /**
+     * Get logged in user object
+     * @author Yansen
+     *
+     * @return UserDomainModel
+     */
+    public static function getAuthUser()
+    {
+        return Session::get('User');
     }
 
 }

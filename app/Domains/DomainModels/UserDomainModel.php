@@ -28,7 +28,6 @@ class UserDomainModel extends DomainModel
     protected $createdAt;
     protected $updatedAt;
 
-    //TODO create GETTER and SETTER for createdAt and updatedAt field
 
     /**
      * UserDomainModel popularity
@@ -134,7 +133,7 @@ class UserDomainModel extends DomainModel
 
 
     /**
-     * Add new user to the database and save user to session
+     * Add new user to the database and move user picture to public directory
      * @author Yansen
      *
      * @param array $data
@@ -142,6 +141,9 @@ class UserDomainModel extends DomainModel
      */
     public static function addUser(array $data)
     {
+        $profilePicture = ProfilePictureDomainModel::createProfilePictureFromFile($data['picture']);
+        $data['picture'] = $profilePicture->getFileName();
+
         $userRepository = new UserRepository();
         return $userRepository->create($data);
     }

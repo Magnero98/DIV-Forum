@@ -78,7 +78,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = UserDomainModel::createUserFromArray($data);
-        return $user->addUser();
+        return UserDomainModel::addUser($data);
     }
 }

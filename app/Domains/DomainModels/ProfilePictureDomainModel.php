@@ -40,18 +40,6 @@ class ProfilePictureDomainModel
 
 
     /**
-     * Get the image directory's path
-     * @author Yansen
-     *
-     * @return String
-     */
-    public function getImageDirectory()
-    {
-        return "/uploads/profile_pictures";
-    }
-
-
-    /**
      * Get the image's path
      * @author Yansen
      *
@@ -59,8 +47,20 @@ class ProfilePictureDomainModel
      */
     public function getImagePath()
     {
-        return $this->getImageDirectory()
+        return self::getImageDirectory()
             . $this->getFilename();
+    }
+
+
+    /**
+     * Get the image directory's path
+     * @author Yansen
+     *
+     * @return String
+     */
+    public static function getImageDirectory()
+    {
+        return "/uploads/profile_pictures";
     }
 
 
@@ -72,7 +72,7 @@ class ProfilePictureDomainModel
      * @param String $path
      * @return void
      */
-    protected function moveToPublicDirectory($file, $path)
+    public static function moveToPublicDirectory($file, $path)
     {
         $file->move($path, $file->getFilename());
     }
@@ -98,6 +98,7 @@ class ProfilePictureDomainModel
 
         return $profilePicture;
     }
+
 
     /**
      * Factory method to create Profile Picture

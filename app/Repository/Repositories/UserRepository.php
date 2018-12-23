@@ -9,8 +9,8 @@
 
 namespace App\Repository\Repositories;
 
+use DateTime;
 use App\Repository\DataModels\User;
-use App\Domains\DomainModels\DomainModel;
 
 class UserRepository implements Repository
 {
@@ -20,7 +20,7 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param Integer $perPage = 10
-     * @return Collection of Repository/DataModels/UserDomainModel
+     * @return Collection of Repository\DataModels\User
      */
     public function all($perPage = 10)
     {
@@ -33,7 +33,7 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param Integer $id
-     * @return User
+     * @return Repository\DataModels\User
      */
     public function find($id)
     {
@@ -44,25 +44,25 @@ class UserRepository implements Repository
      * Insert new model to Database
      * @author Yansen
      *
-     * @param DomainModel $model
-     * @return \Repository\Repositories\UserRepository
+     * @param array $data
+     * @return App\Repository\DataModels\User
      */
-    public function create(DomainModel $model)
+    public function create(array $data)
     {
         return User::create([
-            'role_id' => $model->getRoleId(),
-            'name' => $model->getName(),
-            'email' => $model->getEmail(),
-            'password' => bcrypt($model->getPassword()),
-            'phone' => $model->getPhone(),
-            'gender' => $model->getGender(),
-            'address' => $model->getAddress(),
-            'profile_picture' => $model
-                ->getProfilePicture()
-                ->getFilename(),
-            'birthday' => $model->getBirthday(),
-            'good_popularity' => $model->getPopularity()->getGoodPopularity(),
-            'bad_popularity' => $model->getPopularity()->getBadPopularity(),
+            'role_id' => 2,
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'phone' => $data['phone'],
+            'gender' => $data['gender'],
+            'address' => $data['address'],
+            'profile_picture' => $data['picture'],
+            'birthday' => $data['birthday'],
+            'good_popularity' => 0,
+            'bad_popularity' => 0,
+            'created_at' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+            'updated_at' => date_format(new DateTime(), 'Y-m-d H:i:s')
         ]);
     }
 
@@ -70,13 +70,23 @@ class UserRepository implements Repository
      * Update data with specified id inside Database with updated model
      * @author Yansen
      *
-     * @param DomainModel $model
-     * @param Integer $id
+     * @param array $data
      * @return Boolean
      */
-    public function update(DomainModel $model, $id)
+    public function update(array $data)
     {
-        // TODO: Implement update() method.
+        return User::where('id', $data['id'])
+            ->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'phone' => $data['phone'],
+                'gender' => $data['gender'],
+                'address' => $data['address'],
+                'profile_picture' => $data['picture'],
+                'birthday' => $data['birthday'],
+                'updated_at' => date_format(new DateTime(), 'Y-m-d H:i:s')
+            ]);
     }
 
     /**
@@ -88,7 +98,7 @@ class UserRepository implements Repository
      */
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        return User::destroy($id);
     }
 
 }

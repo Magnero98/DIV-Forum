@@ -19,7 +19,7 @@ class MessageRepository implements Repository
      * @author Alvent
      *
      * @param Integer $perPage = 10
-     * @return Collection of Repository/DataModels/Message
+     * @return Collection of Illuminate\Database\Eloquent\Model
      */
     public function all($perPage = 10)
     {
@@ -30,7 +30,7 @@ class MessageRepository implements Repository
      * Retrieve data from Database with specified id
      * @author Alvent
      *
-     * @return Repository/DataModels/Message
+     * @return Illuminate\Database\Eloquent\Model
      */
     public function find($id)
     {
@@ -41,10 +41,10 @@ class MessageRepository implements Repository
      * Insert new model to Database
      * @author Alvent
      *
-     * @param DomainModel $model
-     * @return Repository/DataModels/Message
+     * @param array $data
+     * @return Illuminate\Database\Eloquent\Model
      */
-    public function create(DomainModel $model)
+    public function create(array $data)
     {
         // TODO: Implement create() method.
     }
@@ -53,11 +53,10 @@ class MessageRepository implements Repository
      * Update data with specified id inside Database with updated model
      * @author Alvent
      *
-     * @param DomainModel $model
-     * @param Integer $id
+     * @param array $data
      * @return Boolean
      */
-    public function update(DomainModel $model, $id)
+    public function update(array $data)
     {
         // TODO: Implement update() method.
     }

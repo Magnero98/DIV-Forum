@@ -143,14 +143,13 @@ class UserDomainModel extends DomainModel
      * Add new user to the database and save user to session
      * @author Yansen
      *
-     * @return App\Repository\DataModels\User
+     * @return Repository\DataModels\User
      */
     public function addUser()
     {
         $userDataModel = $this->userRepository->create($this);
 
         $this->setId($userDataModel->id);
-        //$this->saveUserToSession();
 
         return $userDataModel;
     }
@@ -160,7 +159,7 @@ class UserDomainModel extends DomainModel
      * Save updated user to the database
      * @author Yansen
      *
-     * @return App\Repository\DataModels\User
+     * @return Repository/DataModels/User
      */
     public function editUser()
     {
@@ -212,7 +211,7 @@ class UserDomainModel extends DomainModel
      * Factory Method to create UserDomainModel from array of Data
      * @author Yansen
      *
-     * @param Repository/DataModels/User $model
+     * @param Repository\DataModels\User $model
      * @return UserDomainModel
      */
     public static function createUserFromUserDataModel(User $model)

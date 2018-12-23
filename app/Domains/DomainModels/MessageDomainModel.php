@@ -102,7 +102,8 @@ Class MessageDomainModel extends DomainModel{
     */
 
     public static function deleteMessage($id){
-        MessageRepository::delete($id);
+        $messageRepository = new MessageRepository();
+        $messageRepository->delete($id);
     }
 
 

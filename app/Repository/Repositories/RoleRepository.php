@@ -69,7 +69,7 @@ class RoleRepository implements Repository
      * @param Integer $id
      * @return Boolean
      */
-    public function delete($id)
+    public static function delete($id)
     {
         // TODO: Implement delete() method.
     }

@@ -95,6 +95,16 @@ Class MessageDomainModel extends DomainModel{
     	return $messages;
     }
 
+    /**
+    * Delete message from db with specified Id 
+    * @author Alvent 
+    * @param Integer $id
+    */
+
+    public static function deleteMessage($id){
+        MessageRepository::delete($id);
+    }
+
 
 }
 

@@ -69,9 +69,10 @@ class MessageRepository implements Repository
      * @param Integer $id
      * @return Boolean
      */
-    public function delete($id)
+    public static function delete($id)
     {
-        // TODO: Implement delete() method.
+        $message = Message::find($id); 
+        $message->delete();
     }
 
 
@@ -86,4 +87,5 @@ class MessageRepository implements Repository
     	$messages = User::find($id)->messages;
     	return $messages;
     }
+
 }

@@ -55,6 +55,6 @@ interface Repository
      * @param Integer $id
      * @return Boolean
      */
-    public function delete($id);
+    public static function delete($id);
 
 }

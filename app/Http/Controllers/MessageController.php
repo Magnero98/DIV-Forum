@@ -23,4 +23,16 @@ class MessageController extends Controller
 
     	return redirect('home');
     }
+
+    /**
+    * delete message with specified id
+    * @author Alvent 
+    * @param Integer $id
+    */
+
+    public function deleteMessage($id){
+        MessageDomainModel::deleteMessage($id);
+
+        return back();
+    }
 }

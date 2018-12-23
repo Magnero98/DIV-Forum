@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/inbox', 'MessageController@showMessage');
+Route::delete('/inbox/{id}', 'MessageController@deleteMessage');

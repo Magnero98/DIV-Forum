@@ -46,13 +46,6 @@ class UserDomainModel extends DomainModel
      */
     protected $profilePicture;
 
-    /**
-     * UserRepository Object
-     * @author Yansen
-     *
-     * @var UserRepository
-     */
-    protected $userRepository;
 
     /**
      * Properties GETTER
@@ -70,6 +63,8 @@ class UserDomainModel extends DomainModel
     public function getAddress()		{ return $this->address; }
     public function getProfilePicture()	{ return $this->profilePicture; }
     public function getBirthday()		{ return $this->birthday; }
+    public function getCreatedAt()		{ return $this->createdAt; }
+    public function getUpdatedAt()		{ return $this->updatedAt; }
 
     /**
      * Properties SETTER
@@ -87,16 +82,15 @@ class UserDomainModel extends DomainModel
     protected function setAddress($address)                 { $this->address = $address; return $this; }
     protected function setProfilePicture($profilePicture)   { $this->profilePicture = $profilePicture; return $this; }
     protected function setBirthday($birthday)               { $this->birthday = $birthday; return $this; }
+    protected function setCreatedAt($createdAt)             { $this->createdAt = $createdAt; return $this; }
+    protected function setUpdatedAt($updatedAt)             { $this->updatedAt = $updatedAt; return $this; }
 
 
     /**
      * UserDomainModel Constructor
      * @author Yansen
      */
-    protected function __construct()
-    {
-        $this->userRepository = new UserRepository();
-    }
+    protected function __construct(){}
 
 
     /**
@@ -143,15 +137,13 @@ class UserDomainModel extends DomainModel
      * Add new user to the database and save user to session
      * @author Yansen
      *
+     * @param array $data
      * @return Repository\DataModels\User
      */
-    public function addUser()
+    public static function addUser(array $data)
     {
-        $userDataModel = $this->userRepository->create($this);
-
-        $this->setId($userDataModel->id);
-
-        return $userDataModel;
+        $userRepository = new UserRepository();
+        return $userRepository->create($data);
     }
 
 
@@ -159,11 +151,13 @@ class UserDomainModel extends DomainModel
      * Save updated user to the database
      * @author Yansen
      *
-     * @return Repository/DataModels/User
+     * @param array $data
+     * @return Boolean
      */
-    public function editUser()
+    public static function editUser(array $data)
     {
-
+        $userRepository = new UserRepository();
+        return $userRepository->update($data);
     }
 
 
@@ -172,38 +166,12 @@ class UserDomainModel extends DomainModel
      * @author Yansen
      *
      * @param Integer $userId
-     * @return void
+     * @return Boolean
      */
     public static function deleteUser($userId)
     {
-
-    }
-
-
-    /**
-     * Factory Method to create UserDomainModel from array of Data
-     * @author Yansen
-     *
-     * @param array $data
-     * @return UserDomainModel
-     */
-    public static function createUserFromArray(array $data)
-    {
-        $user = new UserDomainModel();
-
-        $user->setRoleId(2)
-            ->setName($data['name'])
-            ->setEmail($data['email'])
-            ->setPassword($data['password'])
-            ->setPhone($data['phone'])
-            ->setGender($data['gender'])
-            ->setAddress($data['address'])
-            ->setBirthday($data['birthday'])
-            ->setPopularity(UserPopularityDomainModel::createUserPopularity())
-            ->setProfilePicture(
-                ProfilePictureDomainModel::createProfilePictureFromFile($data['picture']));
-
-        return $user;
+        $userRepository = new UserRepository();
+        return $userRepository->delete($userId);
     }
 
 
@@ -227,6 +195,8 @@ class UserDomainModel extends DomainModel
             ->setGender($model->gender)
             ->setAddress($model->address)
             ->setBirthday($model->birthday)
+            ->setCreatedAt($model->created_at)
+            ->setUpdatedAt($model->updated_at)
             ->setPopularity(
                 UserPopularityDomainModel::createUserPopularity(
                     $model->goodPopularity,

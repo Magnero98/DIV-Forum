@@ -38,4 +38,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    /**
+     * Eloquent: one User has many message
+     * @author Alvent
+     */
+    public function messages(){
+        return $this->hasMany('App\Repository\DataModels\Message', 'receiver_id');
+    }
 }

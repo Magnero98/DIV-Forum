@@ -17,4 +17,13 @@ class Message extends Model
         'receiver_id',
         'content',
     ];
+
+    /**
+     * Eloquent: every message belongs to a user
+     * @author Alvent
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Repository\DataModels\User', 'id');
+    }
 }

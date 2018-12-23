@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Domains\DomainModels;
+use App\Repository\Repositories\MessageRepository;
 
 Class MessageDomainModel extends DomainModel{
 	protected $id;
@@ -86,11 +87,11 @@ Class MessageDomainModel extends DomainModel{
     * Show all message received from current User
     * @author Alvent
     * @param $id
-	* @return list Message
+	* @return  Collection of Repository/DataModels/Message
 	*/
 
     public static function showMessage($id){
-    	$messages = $this->messageRepository->showMessage($id);
+    	$messages = MessageRepository::showMessage($id);
     	return $messages;
     }
 

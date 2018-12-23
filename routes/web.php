@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/inbox', 'MessageController@showMesssage');
+Route::get('/inbox', 'MessageController@showMessage');

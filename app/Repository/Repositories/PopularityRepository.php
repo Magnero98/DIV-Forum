@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpUndefinedNamespaceInspection */
+
 /**
  * Created by PhpStorm.
  * User: User
@@ -7,7 +8,6 @@
  */
 
 namespace App\Repository\Repositories;
-
 
 use App\Domains\DomainModels\DomainModel;
 
@@ -19,7 +19,7 @@ class PopularityRepository implements Repository
      * @author Yansen
      *
      * @param Integer $perPage = 10
-     * @return Collection of Repository/DataModels/UserDomainModel
+     * @return Collection of Illuminate\Database\Eloquent\Model
      */
     public function all($perPage = 10)
     {
@@ -30,7 +30,7 @@ class PopularityRepository implements Repository
      * Retrieve data from Database with specified id
      * @author Yansen
      *
-     * @return Repository/DataModels/UserDomainModel
+     * @return Illuminate\Database\Eloquent\Model
      */
     public function find($id)
     {
@@ -42,7 +42,7 @@ class PopularityRepository implements Repository
      * @author Yansen
      *
      * @param DomainModel $model
-     * @return Repository/DataModels/UserDomainModel
+     * @return Illuminate\Database\Eloquent\Model
      */
     public function create(DomainModel $model)
     {
@@ -54,10 +54,9 @@ class PopularityRepository implements Repository
      * @author Yansen
      *
      * @param DomainModel $model
-     * @param Integer $id
      * @return Boolean
      */
-    public function update(DomainModel $model, $id)
+    public function update(DomainModel $model)
     {
         // TODO: Implement update() method.
     }

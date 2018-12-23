@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpUndefinedNamespaceInspection */
+
 /**
  * Created by PhpStorm.
  * UserDomainModel: UserDomainModel
@@ -17,7 +18,7 @@ interface Repository
      * @author Yansen
      *
      * @param Integer $perPage = 10
-     * @return Collection of Repository/DataModels/UserDomainModel
+     * @return Collection of Illuminate\Database\Eloquent\Model
      */
     public function all($perPage = 10);
 
@@ -25,7 +26,7 @@ interface Repository
      * Retrieve data from Database with specified id
      * @author Yansen
      *
-     * @return Repository/DataModels/UserDomainModel
+     * @return Illuminate\Database\Eloquent\Model
      */
     public function find($id);
 
@@ -33,20 +34,19 @@ interface Repository
      * Insert new model to Database
      * @author Yansen
      *
-     * @param DomainModel $model
-     * @return Repository/DataModels/UserDomainModel
+     * @param array $data
+     * @return Illuminate\Database\Eloquent\Model
      */
-    public function create(DomainModel $model);
+    public function create(array $data);
 
     /**
      * Update data with specified id inside Database with updated model
      * @author Yansen
      *
-     * @param DomainModel $model
-     * @param Integer $id
+     * @param array $data
      * @return Boolean
      */
-    public function update(DomainModel $model, $id);
+    public function update(array $data);
 
     /**
      * Delete data with specified id inside Database

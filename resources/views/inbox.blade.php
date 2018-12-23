@@ -1,12 +1,14 @@
 @extends ('layouts.app')
 
 @section('content')
+
+    @if(!$messages->isEmpty())
     <table style="margin:auto">
         <tr>
-            <th width="40%">Name</th>
-            <th>Created At</th>
-            <th>Content</th>
-            <th>Delete</th>
+            <th width="20%">Name</th>
+            <th width="20%">Created At</th>
+            <th width="20%">Content</th>
+            <th width="20%">Delete</th>
         </tr>
         @foreach($messages as $message)
             <tr>
@@ -23,4 +25,7 @@
             </tr>
         @endforeach
     </table>
+    @else
+    <h1>There is no message yet...</h1>
+    @endif
 @endsection

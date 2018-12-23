@@ -9,10 +9,15 @@ use App\Domains\DomainModels\MessageDomainModel;
 
 class MessageController extends Controller
 {
+
+	/**
+	* Show all message received from current user, return to home if user dont login yet
+	* @author Alvent
+	*/
     public function showMessage(){
-    	$id = UserDomainModel::getAuthUser();
-    	if($id){
-    		$messages = MessageDomainModel::showMessage($id->getId());
+    	$user = UserDomainModel::getAuthUser();
+    	if($user){
+    		$messages = MessageDomainModel::showMessage($user->getId());
     		return view('inbox', ["messages" => $messages]);
     	}
 

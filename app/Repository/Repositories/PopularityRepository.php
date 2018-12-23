@@ -1,17 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * UserDomainModel: UserDomainModel
- * Date: 12/21/2018
- * Time: 10:02 AM
+ * User: User
+ * Date: 12/22/2018
+ * Time: 9:44 AM
  */
 
 namespace App\Repository\Repositories;
 
+
 use App\Domains\DomainModels\DomainModel;
 
-interface Repository
+class PopularityRepository implements Repository
 {
+
     /**
      * Retrieve all data from Database with pagination default perpage = 10
      * @author Yansen
@@ -19,7 +21,10 @@ interface Repository
      * @param Integer $perPage = 10
      * @return Collection of Repository/DataModels/UserDomainModel
      */
-    public function all($perPage = 10);
+    public function all($perPage = 10)
+    {
+        // TODO: Implement all() method.
+    }
 
     /**
      * Retrieve data from Database with specified id
@@ -27,7 +32,10 @@ interface Repository
      *
      * @return Repository/DataModels/UserDomainModel
      */
-    public function find($id);
+    public function find($id)
+    {
+        // TODO: Implement find() method.
+    }
 
     /**
      * Insert new model to Database
@@ -36,7 +44,10 @@ interface Repository
      * @param DomainModel $model
      * @return Repository/DataModels/UserDomainModel
      */
-    public function create(DomainModel $model);
+    public function create(DomainModel $model)
+    {
+        // TODO: Implement create() method.
+    }
 
     /**
      * Update data with specified id inside Database with updated model
@@ -46,7 +57,10 @@ interface Repository
      * @param Integer $id
      * @return Boolean
      */
-    public function update(DomainModel $model, $id);
+    public function update(DomainModel $model, $id)
+    {
+        // TODO: Implement update() method.
+    }
 
     /**
      * Delete data with specified id inside Database
@@ -55,6 +69,8 @@ interface Repository
      * @param Integer $id
      * @return Boolean
      */
-    public function delete($id);
-
+    public function delete($id)
+    {
+        // TODO: Implement delete() method.
+    }
 }

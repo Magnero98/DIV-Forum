@@ -34,19 +34,19 @@ interface Repository
      * Insert new model to Database
      * @author Yansen
      *
-     * @param DomainModel $model
+     * @param array $data
      * @return Illuminate\Database\Eloquent\Model
      */
-    public function create(DomainModel $model);
+    public function create(array $data);
 
     /**
      * Update data with specified id inside Database with updated model
      * @author Yansen
      *
-     * @param DomainModel $model
+     * @param array $data
      * @return Boolean
      */
-    public function update(DomainModel $model);
+    public function update(array $data);
 
     /**
      * Delete data with specified id inside Database

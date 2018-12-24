@@ -13,7 +13,7 @@
         @foreach($messages as $message)
             <tr>
                 <td>{{$message->User::find($message->sender_id)->name}}</td>
-                <td>{{$message->created_at}}</td>
+                <td>{{$message->created_at->format('l, d-M-Y H:i:s')}}</td>
                 <td>{{$message->content}}</td>
                 <td>
                     <form action="{{url('inbox/'.$message->id)}}" method="post">

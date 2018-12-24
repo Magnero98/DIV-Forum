@@ -21,3 +21,5 @@ Route::get('/home', 'ForumController@index')->name('home');
 
 Route::get('/inbox', 'MessageController@show');
 Route::delete('/inbox/{id}', 'MessageController@destroy');
+
+Route::get('/forum/create', 'ForumController@create');

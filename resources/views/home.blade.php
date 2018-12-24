@@ -27,7 +27,10 @@
                 @endforeach
 
                 <div style="text-align: center;">
-                    {{ $forums->links() }}
+                    {{ $forums->links() }} 
+                    <div class="col-md-offset-0">
+                        <a href="{{url('forum/create')}}"><button>Add Forum</button></a>
+                    </div>
                 </div>
 
             </div>

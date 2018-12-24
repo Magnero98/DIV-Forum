@@ -25,17 +25,11 @@ class UserDomainModel extends DomainModel
     protected $gender;
     protected $address;
     protected $birthday;
+    protected $goodPopularity;
+    protected $badPopularity;
     protected $createdAt;
     protected $updatedAt;
 
-
-    /**
-     * UserDomainModel popularity
-     * @author Yansen
-     *
-     * @var UserPopularityDomainModel
-     */
-    protected $popularity;
 
     /**
      * UserDomainModel profile picture
@@ -62,6 +56,8 @@ class UserDomainModel extends DomainModel
     public function getAddress()		{ return $this->address; }
     public function getProfilePicture()	{ return $this->profilePicture; }
     public function getBirthday()		{ return $this->birthday; }
+    public function getGoodPopularity()	{ return $this->goodPopularity; }
+    public function getBadPopularity()	{ return $this->badPopularity; }
     public function getCreatedAt()		{ return $this->createdAt; }
     public function getUpdatedAt()		{ return $this->updatedAt; }
 
@@ -81,6 +77,8 @@ class UserDomainModel extends DomainModel
     protected function setAddress($address)                 { $this->address = $address; return $this; }
     protected function setProfilePicture($profilePicture)   { $this->profilePicture = $profilePicture; return $this; }
     protected function setBirthday($birthday)               { $this->birthday = $birthday; return $this; }
+    protected function setGoodPopularity($goodPopularity)   { $this->goodPopularity = $goodPopularity; return $this; }
+    protected function setBadPopularity($badPopularity)     { $this->badPopularity = $badPopularity; return $this; }
     protected function setCreatedAt($createdAt)             { $this->createdAt = $createdAt; return $this; }
     protected function setUpdatedAt($updatedAt)             { $this->updatedAt = $updatedAt; return $this; }
 
@@ -133,6 +131,45 @@ class UserDomainModel extends DomainModel
 
 
     /**
+     * Get logged in user object
+     * @author Yansen
+     *
+     * @return UserDomainModel
+     */
+    public static function getAuthUser()
+    {
+        return Session::get('User');
+    }
+
+
+    /**
+     * Get all users and show them with pagination
+     * @author Yansen
+     *
+     * @param Integer $perPage = 10
+     * @return Collection of Repository\DataModels\User
+     */
+    public static function getAllUsers($perPage)
+    {
+        $userRepository = new UserRepository();
+        return $userRepository->all($perPage);
+    }
+
+
+    /**
+     * Get specified user with related id
+     * @author Yansen
+     *
+     * @param Integer $id
+     * @return Repository\DataModels\User
+     */
+    public static function findUser($id)
+    {
+        $userRepository = new UserRepository();
+        return $userRepository->find($id);
+    }
+
+    /**
      * Add new user to the database and move user picture to public directory
      * @author Yansen
      *
@@ -156,10 +193,10 @@ class UserDomainModel extends DomainModel
      * @param array $data
      * @return Boolean
      */
-    public static function editUser(array $data)
+    public static function editUser(array $data, $id)
     {
         $userRepository = new UserRepository();
-        return $userRepository->update($data);
+        return $userRepository->update($data, $id);
     }
 
 
@@ -199,26 +236,13 @@ class UserDomainModel extends DomainModel
             ->setBirthday($model->birthday)
             ->setCreatedAt($model->created_at)
             ->setUpdatedAt($model->updated_at)
-            ->setPopularity(
-                UserPopularityDomainModel::createUserPopularity(
-                    $model->goodPopularity,
-                    $model->badPopularity))
+            ->setGoodPopularity($model->good_popularity)
+            ->setBadPopularity($model->bad_popularity)
             ->setProfilePicture(
                 ProfilePictureDomainModel::createProfilePicture(
                     $model->profile_picture));
 
         return $user;
-    }
-
-    /**
-     * Get logged in user object
-     * @author Yansen
-     *
-     * @return UserDomainModel
-     */
-    public static function getAuthUser()
-    {
-        return Session::get('User');
     }
 
 }

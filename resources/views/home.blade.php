@@ -20,7 +20,7 @@
                 @foreach($forums as $forum)
                 <div class="panel-body">
                     {{$forum->title}} <br>
-                    Category: {{$forum->category_id}} <br>
+                    Category: {{$forum->category->name}} <br>
                     Posted at: {{$forum->created_at->format('d M Y H:i:s')}} <br>
                     {{$forum->description}}
                 </div><br>

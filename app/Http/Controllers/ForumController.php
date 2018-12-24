@@ -16,7 +16,7 @@ class ForumController extends Controller
     public function index()
     {
         $forums = ForumDomainModel::showAllForum();
-        return view('home', ["forums" => $forums]);
+        return view('forums.index', ["forums" => $forums]);
     }
 
     /**
@@ -26,24 +26,30 @@ class ForumController extends Controller
      */
     public function create()
     {
-        return view('AddForumPage');
+        $input = [
+            'name' => '',
+            'price' => ''
+        ];
+        return view('forums.create', compact('input'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new forum to database. 
      * @author Alvent
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        
+        return "test";
+
     }
 
     /**
      * Display the specified resource.
      * @author Alvent
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -84,4 +90,5 @@ class ForumController extends Controller
     {
         //
     }
+
 }

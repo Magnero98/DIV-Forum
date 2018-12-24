@@ -64,7 +64,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="{{ url('inbox') }}">
+                                        <a href="{{ route('inbox') }}">
                                             Inbox
                                         </a>
                                     </li>

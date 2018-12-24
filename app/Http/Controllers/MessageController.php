@@ -10,7 +10,7 @@ use App\Domains\DomainModels\MessageDomainModel;
 class MessageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the specified message according to user id.
      * @author Alvent
      * @return \Illuminate\Http\Response
      */
@@ -41,16 +41,27 @@ class MessageController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     * @author Alvent
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
      * Display the specified message according to user id.
      * @author Alvent
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function showCurrentUserInbox()
     {
         $user = UserDomainModel::getAuthUser();
         if($user){
             $messages = MessageDomainModel::showMessage($user->getId());
-            return view('inbox', ["messages" => $messages]);
+            return view('messages.show', ["messages" => $messages]);
         }
 
         return redirect('login');

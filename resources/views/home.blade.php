@@ -25,6 +25,11 @@
                     {{$forum->description}}
                 </div><br>
                 @endforeach
+
+                <div style="text-align: center;">
+                    {{ $forums->links() }}
+                </div>
+
             </div>
         </div>
     </div>

@@ -15,7 +15,16 @@
                     Welcome, {{App\Domains\DomainModels\UserDomainModel::getAuthUser()->getName()}}
                     @endguest
 
-                </div>
+                </div><br>
+
+                @foreach($forums as $forum)
+                <div class="panel-body">
+                    {{$forum->title}} <br>
+                    {{$forum->category_id}} <br>
+                    {{$forum->created_at}} <br>
+                    {{$forum->description}}
+                </div><br>
+                @endforeach
             </div>
         </div>
     </div>

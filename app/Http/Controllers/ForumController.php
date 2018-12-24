@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Domains\DomainModels\UserDomainModel;
-use App\Domains\DomainModels\MessageDomainModel;
+use App\Domains\DomainModels\ForumDomainModel;
 
-class MessageController extends Controller
+class ForumController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the forum.
      * @author Alvent
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $forums = ForumDomainModel::showAllForum();
+        return view('home', ["forums" => $forums]);
     }
 
     /**
@@ -41,19 +41,14 @@ class MessageController extends Controller
     }
 
     /**
-     * Display the specified message according to user id.
+     * Display the specified resource.
      * @author Alvent
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $user = UserDomainModel::getAuthUser();
-        if($user){
-            $messages = MessageDomainModel::showMessage($user->getId());
-            return view('inbox', ["messages" => $messages]);
-        }
-
-        return redirect('login');
+        //
     }
 
     /**
@@ -80,14 +75,13 @@ class MessageController extends Controller
     }
 
     /**
-     * Remove the specified message from db.
+     * Remove the specified resource from storage.
      * @author Alvent
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        MessageDomainModel::deleteMessage($id);
-        return back();
+        //
     }
 }

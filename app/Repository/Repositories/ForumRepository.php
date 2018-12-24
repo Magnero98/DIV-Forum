@@ -16,7 +16,8 @@ Class ForumRepository implements Repository{
      */
     public function all($perPage = 5)
     {
-        
+        $forums = Forum::paginate($perPage);
+        return $forums;
     }
 
     /**

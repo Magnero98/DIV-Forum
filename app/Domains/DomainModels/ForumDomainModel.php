@@ -92,14 +92,16 @@ Class ForumDomainModel extends DomainModel{
     }
 
     /**
-	* Show all forum in DB with pagination 5     
+	* Show all forum in DB     
 	* @author Alvent 
 	* @param Integer $perPage
 	* @return Collection of Repository/DataModels/Forum
 	*/
 
-    public static function showAllForum($perPage){
-    	
+    public static function showAllForum(){
+    	$forumRepository = new ForumRepository(); 
+        $forums = $forumRepository->all();
+        return $forums;
     }
 
 

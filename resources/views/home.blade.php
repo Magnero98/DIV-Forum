@@ -9,13 +9,12 @@
 
                 <div class="panel-body">
 
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    @guest
+                    Welcome, Guest..
+                    @else 
+                    Welcome, {{App\Domains\DomainModels\UserDomainModel::getAuthUser()->getName()}}
+                    @endguest
 
-                    You are logged in!
                 </div>
             </div>
         </div>

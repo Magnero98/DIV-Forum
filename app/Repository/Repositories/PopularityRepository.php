@@ -9,7 +9,6 @@
 
 namespace App\Repository\Repositories;
 
-use App\Domains\DomainModels\DomainModel;
 
 class PopularityRepository implements Repository
 {
@@ -54,9 +53,10 @@ class PopularityRepository implements Repository
      * @author Yansen
      *
      * @param array $data
+     * @param Integer $id
      * @return Boolean
      */
-    public function update(array $data)
+    public function update(array $data, $id)
     {
         // TODO: Implement update() method.
     }

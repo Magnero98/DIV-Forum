@@ -71,11 +71,12 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param array $data
+     * @param Integer $id
      * @return Boolean
      */
-    public function update(array $data)
+    public function update(array $data, $id)
     {
-        return User::where('id', $data['id'])
+        return User::where('id', $id)
             ->update([
                 'name' => $data['name'],
                 'email' => $data['email'],

@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpUndefinedNamespaceInspection */
+
 /**
  * Created by PhpStorm.
  * User: User
@@ -19,7 +20,7 @@ class RoleRepository implements Repository
      * @author Yansen
      *
      * @param Integer $perPage = 10
-     * @return Collection of Repository/DataModels/UserDomainModel
+     * @return Collection of Illuminate\Database\Eloquent\Model
      */
     public function all($perPage = 10)
     {
@@ -30,7 +31,7 @@ class RoleRepository implements Repository
      * Retrieve data from Database with specified id
      * @author Yansen
      *
-     * @return Repository/DataModels/UserDomainModel
+     * @return Illuminate\Database\Eloquent\Model
      */
     public function find($id)
     {
@@ -41,10 +42,10 @@ class RoleRepository implements Repository
      * Insert new model to Database
      * @author Yansen
      *
-     * @param DomainModel $model
-     * @return Repository/DataModels/UserDomainModel
+     * @param array $data
+     * @return Illuminate\Database\Eloquent\Model
      */
-    public function create(DomainModel $model)
+    public function create(array $data)
     {
         // TODO: Implement create() method.
     }
@@ -53,11 +54,11 @@ class RoleRepository implements Repository
      * Update data with specified id inside Database with updated model
      * @author Yansen
      *
-     * @param DomainModel $model
+     * @param array $data
      * @param Integer $id
      * @return Boolean
      */
-    public function update(DomainModel $model, $id)
+    public function update(array $data, $id)
     {
         // TODO: Implement update() method.
     }

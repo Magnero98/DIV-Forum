@@ -44,9 +44,10 @@ interface Repository
      * @author Yansen
      *
      * @param array $data
+     * @param Integer $id
      * @return Boolean
      */
-    public function update(array $data);
+    public function update(array $data, $id);
 
     /**
      * Delete data with specified id inside Database

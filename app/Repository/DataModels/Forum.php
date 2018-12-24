@@ -27,4 +27,13 @@ class Forum extends Model
     public function category(){
         return $this->belongsTo('App\Repository\DataModels\Category');
     }
+
+    /**
+    * Create eloquent, Each forum is belongs to 1 forum status
+    * @author Alvent 
+    */
+
+    public function forum_status(){
+        return $this->belongsTo('App\Repository\DataModels\Forum_Status');
+    }
 }

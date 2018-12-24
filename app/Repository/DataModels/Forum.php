@@ -17,6 +17,5 @@ class Forum extends Model
     	'category_id',
     	'forum_status_id',
     	'title',
-    	'description',
     ];
 }

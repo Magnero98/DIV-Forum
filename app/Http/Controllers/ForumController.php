@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domains\DomainModels\ForumDomainModel;
 use App\Domains\DomainModels\CategoryDomainModel;
+use App\Domains\DomainModels\UserDomainModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use App\Repository\DataModels\Forum;
 
 class ForumController extends Controller
 {
@@ -59,10 +61,17 @@ class ForumController extends Controller
             withErrors($validator)->withInput(Input::all());
         }
 
-        
+        $forum = new Forum();
+        $forum->user_id = UserDomainModel::getAuthUser()->getId();
+        $forum->category_id = $request->get('category');
+        $forum->forum_status_id = 1;
+        $forum->title = $request->get('name');
+        $forum->description = $request->get('description');
+        $forum->created_at = date('Y-m-d H:i:s');
+        $forum->updated_at = date('Y-m-d H:i:s');
 
-        return "test";
-
+        $forum->save();
+        return redirect()->route('forums.index');
     }
 
     /**

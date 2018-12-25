@@ -51,23 +51,12 @@ Class ForumDomainModel extends DomainModel{
      * @author Alvent
      *
      * @param array $data
-     * @return ForumDomainModel
+     * @return Repository\DataModels\Forum
      */
      public static function createForumFromArray(array $data)
     {
-
-    }
-
-	/**
-     * Factory Method to create ForumDomainModel from model
-     * @author Alvent
-     *
-     * @param Repository/DataModels/Forum $model
-     * @return ForumDomainModel
-     */
-    public static function createForumFromForumDataModel(Forum $model)
-    {
-
+        $forumRepository = new ForumRepository();
+        return $forumRepository->create($data);
     }
 
     /**

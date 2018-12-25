@@ -4,6 +4,8 @@
 namespace App\Repository\Repositories;
 use App\Repository\DataModels\Forum;
 use App\Domains\DomainModels\DomainModel;
+use App\Domains\DomainModels\UserDomainModel;
+
 
 Class ForumRepository implements Repository{
 
@@ -40,7 +42,18 @@ Class ForumRepository implements Repository{
      */
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        $forum = new Forum();
+        $forum->user_id = UserDomainModel::getAuthUser()->getId();
+        $forum->category_id = $data['category'];
+        $forum->forum_status_id = 1;
+        $forum->title = $data['name'];
+        $forum->description = $data['description'];
+        $forum->created_at = date('Y-m-d H:i:s');
+        $forum->updated_at = date('Y-m-d H:i:s');
+
+        $forum->save();
+
+        return $forum;
     }
 
     /**

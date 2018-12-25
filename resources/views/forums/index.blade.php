@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
+                <div class="panel-heading">
 
                     @guest
                     Welcome, Guest..
@@ -15,7 +15,20 @@
                     Welcome, {{App\Domains\DomainModels\UserDomainModel::getAuthUser()->getName()}}
                     @endguest
 
-                </div><br>
+                </div>
+
+                <form action="{{ route('search') }}" method="POST" role="search">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search"
+                            placeholder="Search Forum by Title and Category Name"> 
+                            <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default">
+                                <span>Search</span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
 
                 @foreach($forums as $forum)
                 <div class="panel-body">
@@ -23,7 +36,7 @@
                     Category: {{$forum->category->name}} <br>
                     Posted at: {{$forum->created_at->format('d M Y H:i:s')}} <br>
                     {{$forum->description}}
-                </div><br>
+                </div>
                 @endforeach
 
                 <div style="text-align: center;">

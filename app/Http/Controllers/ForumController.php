@@ -66,16 +66,8 @@ class ForumController extends Controller
             withErrors($validator)->withInput(Input::all());
         }
 
-        $forum = new Forum();
-        $forum->user_id = UserDomainModel::getAuthUser()->getId();
-        $forum->category_id = $request->get('category');
-        $forum->forum_status_id = 1;
-        $forum->title = $request->get('name');
-        $forum->description = $request->get('description');
-        $forum->created_at = date('Y-m-d H:i:s');
-        $forum->updated_at = date('Y-m-d H:i:s');
+        ForumDomainModel::createForumFromArray($request->all());
 
-        $forum->save();
         return redirect()->route('forums.index');
     }
 
@@ -123,5 +115,17 @@ class ForumController extends Controller
     {
         //
     }
+
+    /**
+    * Search forum by title and category name 
+    * @author Alvent 
+    * @param \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function searchForum(Request $request){
+        $search = $request->get('search');
+
+        return $search;
+    } 
 
 }

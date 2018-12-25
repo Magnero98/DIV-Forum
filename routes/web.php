@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'ForumController@index')->name('home');
 
 Route::resource('/forums', 'ForumController');
+Route::post('/home/search', 'ForumController@searchForum')->name('search');
 
 Route::resource('/messages', 'MessageController');
 Route::get('/messages', 'MessageController@showCurrentUserInbox')->name('inbox');

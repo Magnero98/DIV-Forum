@@ -38,4 +38,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function popularities()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'popularities',
+            'voter_user_id',
+            'target_user_id')
+            ->withPivot(['popularity_status_id']);
+    }
+
 }

@@ -17,6 +17,7 @@ class ComposerStaticInit6755efa733219b31574108a56d6aa9aa
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '75c4045fabce667f42442e32366b4986' => __DIR__ . '/../..' . '/app/Helpers/UserDomainHelper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -318,10 +319,12 @@ class ComposerStaticInit6755efa733219b31574108a56d6aa9aa
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Domains\\DomainModels\\DomainModel' => __DIR__ . '/../..' . '/app/Domains/DomainModels/DomainModel.php',
+        'App\\Domains\\DomainModels\\PopularityDomainModel' => __DIR__ . '/../..' . '/app/Domains/DomainModels/PopularityDomainModel.php',
+        'App\\Domains\\DomainModels\\PopularityStatusEnumeration' => __DIR__ . '/../..' . '/app/Domains/DomainModels/PopularityStatusEnumeration.php',
         'App\\Domains\\DomainModels\\ProfilePictureDomainModel' => __DIR__ . '/../..' . '/app/Domains/DomainModels/ProfilePictureDomainModel.php',
         'App\\Domains\\DomainModels\\RoleDomainModel' => __DIR__ . '/../..' . '/app/Domains/DomainModels/RoleDomainModel.php',
         'App\\Domains\\DomainModels\\UserDomainModel' => __DIR__ . '/../..' . '/app/Domains/DomainModels/UserDomainModel.php',
-        'App\\Domains\\DomainModels\\UserPopularityDomainModel' => __DIR__ . '/../..' . '/app/Domains/DomainModels/UserPopularityDomainModel.php',
+        'App\\Domains\\DomainModels\\UserRoleEnumeration' => __DIR__ . '/../..' . '/app/Domains/DomainModels/UserRoleEnumeration.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -329,6 +332,8 @@ class ComposerStaticInit6755efa733219b31574108a56d6aa9aa
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\PopularityController' => __DIR__ . '/../..' . '/app/Http/Controllers/PopularityController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -340,10 +345,12 @@ class ComposerStaticInit6755efa733219b31574108a56d6aa9aa
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Repository\\DataModels\\Popularity' => __DIR__ . '/../..' . '/app/Repository/DataModels/Popularity.php',
         'App\\Repository\\DataModels\\Role' => __DIR__ . '/../..' . '/app/Repository/DataModels/Role.php',
         'App\\Repository\\DataModels\\User' => __DIR__ . '/../..' . '/app/Repository/DataModels/User.php',
         'App\\Repository\\Repositories\\PopularityRepository' => __DIR__ . '/../..' . '/app/Repository/Repositories/PopularityRepository.php',
         'App\\Repository\\Repositories\\Repository' => __DIR__ . '/../..' . '/app/Repository/Repositories/Repository.php',
+        'App\\Repository\\Repositories\\RoleRepository' => __DIR__ . '/../..' . '/app/Repository/Repositories/RoleRepository.php',
         'App\\Repository\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/Repository/Repositories/UserRepository.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',

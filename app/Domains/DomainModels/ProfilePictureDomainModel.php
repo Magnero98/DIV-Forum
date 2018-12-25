@@ -87,7 +87,7 @@ class ProfilePictureDomainModel
      * @param File $file
      * @return ProfilePictureDomainModel
      */
-    public static function createProfilePictureFromFile($file)
+    public static function createFromFile($file)
     {
         $profilePicture = new ProfilePictureDomainModel();
 
@@ -107,7 +107,7 @@ class ProfilePictureDomainModel
      * @param String $filename
      * @return ProfilePictureDomainModel
      */
-    public static function createProfilePicture($filename)
+    public static function create($filename)
     {
         $profilePicture = new ProfilePictureDomainModel();
 

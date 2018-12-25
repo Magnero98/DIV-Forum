@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ForumController@index')->name('home');
 
-Route::get('/inbox', 'MessageController@showMessage');
-Route::delete('/inbox/{id}', 'MessageController@deleteMessage');
+Route::resource('/forums', 'ForumController');
+
+Route::resource('/messages', 'MessageController');
+Route::get('/messages', 'MessageController@showCurrentUserInbox')->name('inbox');

@@ -19,7 +19,7 @@ class CreateForumsTable extends Migration
             $table->integer('category_id')->unsigned()->default();
             $table->integer('forum_status_id')->unsigned()->default();
             $table->string('title',191);
-            $table->string('description', 191);
+            $table->string('description', 191)->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('Cascade')->onDelete('Cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('Cascade')->onDelete('Cascade'); 

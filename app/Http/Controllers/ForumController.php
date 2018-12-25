@@ -124,8 +124,9 @@ class ForumController extends Controller
     */
     public function searchForum(Request $request){
         $search = $request->get('search');
-
-        return $search;
+        $forums = ForumDomainModel::searchForum($search);
+        $forums->appends($request->only('search'));
+        return view('forums.index', compact('forums')); 
     } 
 
 }

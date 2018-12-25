@@ -92,6 +92,17 @@ Class ForumRepository implements Repository{
 
     }
 
+    /**
+    * Display forum by title or name     
+    * @author Alvent 
+    * @param string $search
+    * @return Collection of Repository/DataModels/Forum
+    */
+    public static function search($search){
+        $forums = Forum::where('title','LIKE','%'.$search.'%')->paginate(5);
+        return $forums;
+    }
+
 
 }
 

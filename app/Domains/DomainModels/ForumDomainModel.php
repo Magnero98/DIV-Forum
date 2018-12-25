@@ -93,7 +93,17 @@ Class ForumDomainModel extends DomainModel{
         return $forums;
     }
 
-
+    /**
+    * Display forum by title or name     
+    * @author Alvent 
+    * @param string $search
+    * @return Collection of Repository/DataModels/Forum
+    */
+    public static function searchForum($search){
+        $forumRepository = new ForumRepository();
+        $forums = $forumRepository->search($search);
+        return $forums;
+    }
 
 }
 

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domains\DomainModels\ForumDomainModel;
+use App\Domains\DomainModels\CategoryDomainModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
-use App\Repository\DataModels\Category;
 
 class ForumController extends Controller
 {
@@ -29,7 +29,7 @@ class ForumController extends Controller
      */
     public function create()
     {   
-        $categories = Category::all();
+        $categories = CategoryDomainModel::showAllCategory();
         $input = [
             'name' => '',
             'category' => '',
@@ -48,16 +48,18 @@ class ForumController extends Controller
     {
         
         $validator = Validator::make($request->all(),[
-            'name' => 'required|max:5',
+            'name' => 'required',
             'category' => 'required'
         ]);
         //
 
         if($validator->fails()){
-            $categories = Category::all();
+            $categories = CategoryDomainModel::showAllCategory();
             return view('forums.create',["categories" => $categories])->
             withErrors($validator)->withInput(Input::all());
         }
+
+        
 
         return "test";
 

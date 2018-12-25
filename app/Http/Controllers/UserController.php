@@ -39,7 +39,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         UserDomainModel::addUser($request->all());
-        return route('users.index');
+        return redirect(route('users.index'));
     }
 
     /**
@@ -63,7 +63,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit');
+        $user = UserDomainModel::findUser($id);
+        return view('users.edit')
+            ->with('user', $user);
     }
 
     /**
@@ -76,7 +78,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         UserDomainModel::editUser($request->all(), $id);
-        return route('users.index');
+        return redirect(route('users.index'));
     }
 
     /**

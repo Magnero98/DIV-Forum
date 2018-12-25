@@ -20,3 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/users', 'UserController');
+
+Route::group(['prefix' => '/popularities/vote', 'as' => 'popularities.'], function (){
+
+    Route::get('/{userId}/Good', 'PopularityController@voteGoodForUser')->name('good');
+
+    Route::get('/{userId}/Bad', 'PopularityController@voteBadForUser')->name('bad');
+
+});

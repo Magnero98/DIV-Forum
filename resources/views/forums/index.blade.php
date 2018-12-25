@@ -40,7 +40,7 @@
                 @endforeach
 
                 <div style="text-align: center;">
-                    {{ $forums->render() }} 
+                    {{ $forums->links() }} 
 
                     @guest
                     @else

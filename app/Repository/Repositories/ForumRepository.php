@@ -18,7 +18,7 @@ Class ForumRepository implements Repository{
      */
     public function all($perPage = 5)
     {
-        $forums = Forum::paginate($perPage);
+        $forums = Forum::orderBy('created_at','desc')->paginate($perPage);
         return $forums;
     }
 
@@ -99,7 +99,11 @@ Class ForumRepository implements Repository{
     * @return Collection of Repository/DataModels/Forum
     */
     public static function search($search){
-        $forums = Forum::where('title','LIKE','%'.$search.'%')->paginate(5);
+        $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
+        {
+            $q->where('name', 'like', '%'.$search.'%');
+        })->orderBy('forums.created_at','desc')->paginate(5);
+
         return $forums;
     }
 

@@ -126,7 +126,7 @@ class ForumController extends Controller
         $search = $request->get('search');
         $forums = ForumDomainModel::searchForum($search);
         $forums->appends($request->only('search'));
-        return view('forums.index', compact('forums')); 
+        return view('forums.index', ["forums" => $forums]); 
     } 
 
 }

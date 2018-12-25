@@ -31,13 +31,18 @@ class ForumController extends Controller
      */
     public function create()
     {   
-        $categories = CategoryDomainModel::showAllCategory();
-        $input = [
-            'name' => '',
-            'category' => '',
-            'description' => ''
-        ];
-        return view('forums.create', compact('input'), compact('categories'));
+        $user = UserDomainModel::getAuthUser();
+        if($user){
+            $categories = CategoryDomainModel::showAllCategory();
+            $input = [
+                'name' => '',
+                'category' => '',
+                'description' => ''
+            ];
+            return view('forums.create', compact('input'), compact('categories'));
+        }
+        
+        return redirect('login');
     }
 
     /**

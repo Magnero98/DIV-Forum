@@ -28,9 +28,13 @@
 
                 <div style="text-align: center;">
                     {{ $forums->links() }} 
+
+                    @guest
+                    @else
                     <div class="col-md-offset-0">
                         <a href="{{route('forums.create')}}"><button>Add Forum</button></a>
                     </div>
+                    @endguest
                 </div>
 
             </div>

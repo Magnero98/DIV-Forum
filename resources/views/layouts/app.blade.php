@@ -31,6 +31,13 @@
                     <a class="navbar-brand" href="{{ url('/home') }}">
                         dIV Forum
                     </a>
+
+                    @guest
+                    @else
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        My Forum
+                    </a>
+                    @endguest
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

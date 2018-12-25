@@ -20,7 +20,7 @@ interface Repository
      * @param Integer $perPage = 10
      * @return Collection of Illuminate\Database\Eloquent\Model
      */
-    public function all($perPage = 10);
+    //public function all($perPage = 10);
 
     /**
      * Retrieve data from Database with specified id
@@ -28,7 +28,7 @@ interface Repository
      *
      * @return Illuminate\Database\Eloquent\Model
      */
-    public function find($id);
+    //public function find($id);
 
     /**
      * Insert new model to Database
@@ -37,16 +37,17 @@ interface Repository
      * @param array $data
      * @return Illuminate\Database\Eloquent\Model
      */
-    public function create(array $data);
+    //public function create(array $data);
 
     /**
      * Update data with specified id inside Database with updated model
      * @author Yansen
      *
      * @param array $data
+     * @param Integer $id
      * @return Boolean
      */
-    public function update(array $data);
+    //public function update(array $data, $id);
 
     /**
      * Delete data with specified id inside Database
@@ -55,6 +56,6 @@ interface Repository
      * @param Integer $id
      * @return Boolean
      */
-    public function delete($id);
+    //public function delete($id);
 
 }

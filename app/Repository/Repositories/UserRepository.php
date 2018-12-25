@@ -9,8 +9,11 @@
 
 namespace App\Repository\Repositories;
 
+use App\Domains\DomainModels\UserDomainModel;
+use App\Repository\DataModels\Popularity;
 use DateTime;
 use App\Repository\DataModels\User;
+use App\Domains\DomainModels\UserRoleEnumeration;
 
 class UserRepository implements Repository
 {
@@ -45,12 +48,12 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param array $data
-     * @return App\Repository\DataModels\User
+     * @return Repository\DataModels\User
      */
     public function create(array $data)
     {
         return User::create([
-            'role_id' => 2,
+            'role_id' => UserRoleEnumeration::User,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -71,11 +74,12 @@ class UserRepository implements Repository
      * @author Yansen
      *
      * @param array $data
+     * @param Integer $id
      * @return Boolean
      */
-    public function update(array $data)
+    public function update(array $data, $id)
     {
-        return User::where('id', $data['id'])
+        return User::where('id', $id)
             ->update([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -101,4 +105,21 @@ class UserRepository implements Repository
         return User::destroy($id);
     }
 
+
+    /**
+     * Update user good and bad popularity
+     * @author Yansen
+     *
+     * @param Integer $userId
+     * @param UserDomainModel $model
+     * @return Repository\DataModels\User
+     */
+    public function updateUserPopularity(UserDomainModel $model)
+    {
+        return User::where('id', '=', $model->getId())
+            ->update([
+               'good_popularity' => $model->getGoodPopularity(),
+               'bad_popularity' => $model->getBadPopularity()
+            ]);
+    }
 }

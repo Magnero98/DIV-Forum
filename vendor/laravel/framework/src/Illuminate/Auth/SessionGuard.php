@@ -423,7 +423,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
         // based on the login and logout events fired from the guard instances.
         $this->fireLoginEvent($user, $remember);
 
-        $userDomain = UserDomainModel::createUserFromUserDataModel($user);
+        $userDomain = UserDomainModel::createFromDataModel($user);
         $userDomain->saveUserToSession();
 
         $this->setUser($user);

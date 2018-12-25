@@ -38,10 +38,27 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Popularities relation: Many Users belongs to many Users
+     * @author Yansen
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function popularities()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'popularities',
+            'voter_user_id',
+            'target_user_id')
+            ->withPivot(['popularity_status_id']);
+    }
 
     /**
      * Eloquent: one User has many message
      * @author Alvent
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages(){
         return $this->hasMany('App\Repository\DataModels\Message', 'receiver_id');

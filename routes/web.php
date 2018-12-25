@@ -17,9 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('/users', 'UserController');
+
+Route::group(['prefix' => '/popularities/vote', 'as' => 'popularities.'], function (){
+
+    Route::get('/{userId}/Good', 'PopularityController@voteGoodForUser')->name('good');
+
+    Route::get('/{userId}/Bad', 'PopularityController@voteBadForUser')->name('bad');
+
+});
+
 Route::get('/home', 'ForumController@index')->name('home');
 
 Route::resource('/forums', 'ForumController');
 
 Route::resource('/messages', 'MessageController');
+
 Route::get('/messages', 'MessageController@showCurrentUserInbox')->name('inbox');

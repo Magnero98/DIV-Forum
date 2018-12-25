@@ -3,73 +3,86 @@
 /**
  * Created by PhpStorm.
  * User: User
- * Date: 12/22/2018
- * Time: 9:44 AM
+ * Date: 12/24/2018
+ * Time: 2:47 PM
  */
 
 namespace App\Repository\Repositories;
 
-use App\Domains\DomainModels\DomainModel;
+use App\Repository\DataModels\User;
+use App\Domains\DomainModels\PopularityDomainModel;
 
 class PopularityRepository implements Repository
 {
 
     /**
-     * Retrieve all data from Database with pagination default perpage = 10
+     * Find voter user and target user in popularities table
      * @author Yansen
      *
-     * @param Integer $perPage = 10
-     * @return Collection of Illuminate\Database\Eloquent\Model
+     * @param Integer $voterUserId
+     * @param Integer $targetUserId
+     * @return Illuminate\Database\Eloquent\Relations\Pivot
      */
-    public function all($perPage = 10)
+    public function find($voterUserId, $targetUserId)
     {
-        // TODO: Implement all() method.
+        $voter = User::find($voterUserId);
+        $target = $this->getVoteTarget($voter, $targetUserId);
+
+        if(!is_null($target))
+        {
+            return $target->pivot;
+        }
+
+        return null;
     }
 
     /**
-     * Retrieve data from Database with specified id
+     * Find user's vote target
      * @author Yansen
      *
-     * @return Illuminate\Database\Eloquent\Model
+     * @param User $voter
+     * @param Integer $targetUserId
+     * @return Repository\DataModels\User
      */
-    public function find($id)
+    public function getVoteTarget($voter, $targetUserId)
     {
-        // TODO: Implement find() method.
+        return $voter->popularities
+                    ->where('id', '=', $targetUserId)
+                    ->first();
     }
 
-    /**
-     * Insert new model to Database
-     * @author Yansen
-     *
-     * @param array $data
-     * @return Illuminate\Database\Eloquent\Model
-     */
-    public function create(array $data)
-    {
-        // TODO: Implement create() method.
-    }
 
     /**
-     * Update data with specified id inside Database with updated model
+     * Insert new popularity to popularities table
      * @author Yansen
      *
-     * @param array $data
-     * @return Boolean
+     * @param PopularityDomainModel $model
+     * @return void
      */
-    public function update(array $data)
+    public function create(PopularityDomainModel $model)
     {
-        // TODO: Implement update() method.
+        User::find($model->getVoterUserId())
+            ->popularities()
+            ->attach(
+                $model->getTargetUserId(),
+                ['popularity_status_id' => $model->getVoteStatus()]);
     }
 
+
     /**
-     * Delete data with specified id inside Database
+     * Update popularities table with new user's vote
      * @author Yansen
      *
-     * @param Integer $id
-     * @return Boolean
+     * @param PopularityDomainModel $model
+     * @return void
      */
-    public function delete($id)
+    public function update(PopularityDomainModel $model)
     {
-        // TODO: Implement delete() method.
+        User::find($model->getVoterUserId())
+            ->popularities()
+            ->updateExistingPivot(
+                $model->getTargetUserId(),
+                ['popularity_status_id' => $model->getVoteStatus()]);
     }
+
 }

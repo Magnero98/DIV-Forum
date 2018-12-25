@@ -21,6 +21,7 @@ Route::get('/home', 'ForumController@index')->name('home');
 
 Route::resource('/forums', 'ForumController');
 Route::get('/search', 'ForumController@searchForum')->name('search');
+Route::get('/myforum', 'ForumController@myForum')->name('myForum');
 
 Route::resource('/messages', 'MessageController');
 Route::get('/messages', 'MessageController@showCurrentUserInbox')->name('inbox');

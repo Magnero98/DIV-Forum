@@ -105,6 +105,17 @@ Class ForumDomainModel extends DomainModel{
         return $forums;
     }
 
+    /**
+    * Display all forum owned    
+    * @author Alvent 
+    * @return Collection of Repository/DataModels/Forum
+    */
+    public static function myForum(){
+        $forumRepository = new ForumRepository();
+        $forums = $forumRepository->myForum();
+        return $forums;
+    }
+
 }
 
 

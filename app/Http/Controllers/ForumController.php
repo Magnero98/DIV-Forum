@@ -129,4 +129,14 @@ class ForumController extends Controller
         return view('forums.index', ["forums" => $forums]); 
     } 
 
+    /**
+    * show all forum owned 
+    * @author Alvent 
+    * @param \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function myForum(){
+        $forums = ForumDomainModel::myForum();
+        return view('forums.myForum', ["forums" => $forums]);
+    } 
 }

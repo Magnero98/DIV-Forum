@@ -82,7 +82,7 @@ class MessageRepository implements Repository
      * @param Integer $id
      * @return Boolean
      */
-    public static function showMessage($id){
+    public function showMessage($id){
     	$messages = User::find($id)->messages;
     	return $messages;
     }

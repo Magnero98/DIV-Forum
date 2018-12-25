@@ -34,7 +34,7 @@
 
                     @guest
                     @else
-                    <a class="navbar-brand" href="{{ url('/home') }}">
+                    <a class="navbar-brand" href="{{ route('myForum') }}">
                         My Forum
                     </a>
                     @endguest

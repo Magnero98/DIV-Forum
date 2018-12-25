@@ -88,7 +88,7 @@ Class ForumRepository implements Repository{
      * @param Integer $id
      * @return Boolean
      */
-    public static function showForum($id){
+    public function showForum($id){
 
     }
 
@@ -98,13 +98,24 @@ Class ForumRepository implements Repository{
     * @param string $search
     * @return Collection of Repository/DataModels/Forum
     */
-    public static function search($search){
+    public function search($search){
         $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
         {
             $q->where('name', 'like', '%'.$search.'%');
         })->orderBy('forums.created_at','desc')->paginate(5);
 
         return $forums;
+    }
+
+    /**
+    * Display forum owned by user  
+    * @author Alvent 
+    * @return Collection of Repository/DataModels/Forum
+    */
+
+    public function myForum(){
+        $userId = UserDomainModel::getAuthUser()->getId();
+        return Forum::where('user_id','=',$userId)->paginate(5);
     }
 
 

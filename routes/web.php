@@ -21,5 +21,5 @@ Route::get('/home', 'ForumController@index')->name('home');
 
 Route::resource('/forums', 'ForumController');
 
-Route::resource('/messages', 'MessageController')->only(['destroy']);
+Route::resource('/messages', 'MessageController');
 Route::get('/messages', 'MessageController@showCurrentUserInbox')->name('inbox');

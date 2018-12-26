@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::resource('/users', 'UserController');
@@ -30,7 +26,7 @@ Route::group(['prefix' => '/popularities/vote', 'as' => 'popularities.'], functi
 Route::resource('/threads', 'ThreadController')
 ->only(['store', 'edit', 'update', 'destroy']);
 
-Route::get('/home', 'ForumController@index')->name('home');
+Route::get('/', 'ForumController@index')->name('home');
 
 Route::resource('/forums', 'ForumController');
 Route::get('/search', 'ForumController@searchForum')->name('search');

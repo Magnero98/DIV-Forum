@@ -31,7 +31,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
+                    <a class="navbar-brand" href="{{ route('home') }}">
                         dIV Forum
                     </a>
 

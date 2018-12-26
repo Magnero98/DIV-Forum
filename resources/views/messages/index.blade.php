@@ -24,6 +24,8 @@
                 </td>
             </tr>
         @endforeach
+
+        {{ $messages->link() }}
     </table>
     @else
     <h1>There is no message yet...</h1>

@@ -87,4 +87,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Thread::class);
     }
+
+    /**
+    * Create eloquent, Each user has many forum
+    * @author Alvent 
+    */
+    public function forums(){
+        return $this->hasMany('App\Repository\DataModels\Forum', 'user_id');
+    }
 }

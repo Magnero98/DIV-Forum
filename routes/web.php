@@ -31,5 +31,6 @@ Route::get('/', 'ForumController@index')->name('home');
 Route::resource('/forums', 'ForumController');
 Route::get('/myforum', 'ForumController@myForum')->name('myForum');
 Route::post('/forums/{id}/updateStatus', 'ForumController@updateStatus');
+Route::get('/masterForum', 'ForumController@masterForum')->name('masterForum');
 
 Route::resource('/messages', 'MessageController');

@@ -18,8 +18,8 @@ class MessageController extends Controller
     {
         $user = UserDomainModel::getAuthUser();
         if($user){
-            $messages = MessageDomainModel::showMessage($user->getId());
-            return view('messages.show', ["messages" => $messages]);
+            $messages = MessageDomainModel::showMessage(10, $user->getId());
+            return view('messages.index', ["messages" => $messages]);
         }
 
         return redirect('login');

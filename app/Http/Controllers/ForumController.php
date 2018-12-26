@@ -21,9 +21,14 @@ class ForumController extends Controller
      */
 
     public function index(Request $request)
-    {
+    {   
         $forums = ForumDomainModel::showAllForum(5, $request->search);
         return view('forums.index', ["forums" => $forums]);
+    }
+
+    public function masterForum(){
+        $forums = ForumDomainModel::showAllForum(10);
+        return view('forums.admins.index', ["forums" => $forums]);
     }
 
     /**
@@ -135,18 +140,19 @@ class ForumController extends Controller
     public function updateStatus($id){
         ForumDomainModel::updateStatus($id);
 
-        return redirect()->route('myForum');
+        return back();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified forum from database.
      * @author Alvent
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        ForumDomainModel::deleteForum($id);
+        return back();
     }
 
     /**

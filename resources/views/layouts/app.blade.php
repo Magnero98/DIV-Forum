@@ -40,6 +40,10 @@
                     <a class="navbar-brand" href="{{ route('myForum') }}">
                         My Forum
                     </a>
+                        @if(App\Domains\DomainModels\UserDomainModel::getAuthUser()->getRoleId() == 1)
+                            <a class="navbar-brand" href="{{ route('masterForum')}}">Master Forum</a>
+                        @endif
+
                     @endguest
                 </div>
 

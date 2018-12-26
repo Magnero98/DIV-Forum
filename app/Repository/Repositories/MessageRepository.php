@@ -15,15 +15,16 @@ class MessageRepository implements Repository
 {
 
     /**
-     * Retrieve all data from Database with pagination default perpage = 10
+     * Retrieve all message received with pagination default perpage = 10
      * @author Alvent
-     *
      * @param Integer $perPage = 10
+     * @param Integer $id
      * @return Collection of Illuminate\Database\Eloquent\Model
      */
-    public function all($perPage = 10)
+    public function all($perPage = 10, $id)
     {
-        // TODO: Implement all() method.
+        $messages = Message::where('receiver_id','=',$id)->paginate($perPage);
+        return $messages;
     }
 
     /**
@@ -72,19 +73,6 @@ class MessageRepository implements Repository
     {
         $message = Message::find($id); 
         $message->delete();
-    }
-
-
-      /**
-     * Get all message from specified user id
-     * @author Alvent
-     *
-     * @param Integer $id
-     * @return Boolean
-     */
-    public function showMessage($id){
-    	$messages = User::find($id)->messages;
-    	return $messages;
     }
 
 }

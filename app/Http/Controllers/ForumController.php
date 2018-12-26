@@ -53,12 +53,8 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'category' => 'required'
-        ]);
-        //
+            
+        $validator = $this->validator($request->all());
 
         if($validator->fails()){
             $categories = CategoryDomainModel::showAllCategory();
@@ -69,6 +65,20 @@ class ForumController extends Controller
         ForumDomainModel::createForumFromArray($request->all());
 
         return redirect()->route('forums.index');
+    }
+
+    /**
+     * Get a validator for create forum request.
+     * @author Alvent
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'name' => 'required',
+            'category' => 'required',
+        ]);
     }
 
     /**
@@ -90,7 +100,10 @@ class ForumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $forum = ForumDomainModel::showForum($id);
+        $categories = CategoryDomainModel::showAllCategory();
+
+        return view('forums.edit',["forum" => $forum], ["categories" => $categories]);
     }
 
     /**

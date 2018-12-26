@@ -60,14 +60,15 @@ Class ForumDomainModel extends DomainModel{
     }
 
     /**
-    * Show all Forum created by specified user id
+    * Show forum with specified id
     * @author Alvent
     * @param $id
-	* @return  Collection of Repository/DataModels/Forum
+	* @return Repository/DataModels/Forum
 	*/
 
     public static function showForum($id){
-
+        $forumRepository = new ForumRepository();
+        return $forumRepository->find($id);
     }
 
     /**

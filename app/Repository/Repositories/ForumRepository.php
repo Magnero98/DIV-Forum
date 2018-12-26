@@ -30,7 +30,8 @@ Class ForumRepository implements Repository{
      */
     public function find($id)
     {
-        // TODO: Implement find() method.
+        $forum = Forum::find($id);
+        return $forum;
     }
 
     /**

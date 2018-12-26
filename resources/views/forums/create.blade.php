@@ -15,7 +15,7 @@
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ $input['name'] }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -32,7 +32,7 @@
                                 <select name="category" class="form-control">
                                     <option value="">--Select--</option>
                                     @foreach($categories as $listCategory)
-                                        <option value="{{$listCategory->id}}" @if( $input['category'] == $listCategory->id)selected="selected" @endif>{{$listCategory->name}}</option>
+                                        <option value="{{$listCategory->id}}" @if( old('category') == $listCategory->id)selected="selected" @endif>{{$listCategory->name}}</option>
                                     @endforeach
                                 </select>
 
@@ -48,7 +48,7 @@
                             <label for="description" class="col-md-4 control-label">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control" name="description" value="{{ $input['description'] }}" >
+                                <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" >
                             </div>
                         </div>
 

@@ -34,12 +34,7 @@ class ForumController extends Controller
         $user = UserDomainModel::getAuthUser();
         if($user){
             $categories = CategoryDomainModel::showAllCategory();
-            $input = [
-                'name' => '',
-                'category' => '',
-                'description' => ''
-            ];
-            return view('forums.create', compact('input'), compact('categories'));
+            return view('forums.create', compact('categories'));
         }
         
         return redirect('login');
@@ -57,9 +52,7 @@ class ForumController extends Controller
         $validator = $this->validator($request->all());
 
         if($validator->fails()){
-            $categories = CategoryDomainModel::showAllCategory();
-            return view('forums.create',["categories" => $categories])->
-            withErrors($validator)->withInput(Input::all());
+            return redirect()->route('forums.create')->withErrors($validator)->withInput(Input::all());
         }
 
         ForumDomainModel::createForumFromArray($request->all());
@@ -117,12 +110,7 @@ class ForumController extends Controller
     {
         $validator = $this->validator($request->all());
         if($validator->fails()){
-            $categories = CategoryDomainModel::showAllCategory();
-            $forum = ForumDomainModel::showForum($id);
-            $forum->title = $request->get('name');
-            $forum->category_id = $request->get('category');
-            $forum->description = $request->get('description');
-            return view('forums.edit',["categories" => $categories],["forum" => $forum])->withErrors($validator)->withInput(Input::all());
+           return redirect()->route('forums.edit', $id)->withErrors($validator);
         }
 
         ForumDomainModel::updateForumFromArray($request->all(), $id);

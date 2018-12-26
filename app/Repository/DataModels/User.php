@@ -40,10 +40,51 @@ class User extends Authenticatable
 
 
     /**
+     * User relation: Many user belongs to One Role
+     * @author Yansen
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Popularities relation: Many Users belongs to many Users
+     * @author Yansen
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function popularities()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'popularities',
+            'voter_user_id',
+            'target_user_id')
+            ->withPivot(['popularity_status_id']);
+    }
+
+    /**
      * Eloquent: one User has many message
      * @author Alvent
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages(){
         return $this->hasMany('App\Repository\DataModels\Message', 'receiver_id');
+    }
+
+
+    /**
+     * User relation: One User has many threads
+     * @author Yansen
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function threads()
+    {
+        return $this->hasMany(Thread::class);
     }
 }

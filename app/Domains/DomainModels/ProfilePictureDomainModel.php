@@ -60,7 +60,7 @@ class ProfilePictureDomainModel
      */
     public static function getImageDirectory()
     {
-        return "/uploads/profile_pictures";
+        return "uploads\profile_pictures";
     }
 
 
@@ -68,13 +68,14 @@ class ProfilePictureDomainModel
      * Move image file to public directory
      * @author Yansen
      *
-     * @param array $file
-     * @param String $path
+     * @param File $file
      * @return void
      */
-    public static function moveToPublicDirectory($file, $path)
+    public static function moveToPublicDirectory($file)
     {
-        $file->move($path, $file->getFilename());
+        $file->move(
+            ProfilePictureDomainModel::getImageDirectory(),
+            $file->getFilename());
     }
 
 
@@ -83,18 +84,16 @@ class ProfilePictureDomainModel
      * and save it to public/uploads/images
      * @author Yansen
      *
-     * @param array $file
+     * @param File $file
      * @return ProfilePictureDomainModel
      */
-    public static function createProfilePictureFromFile($file)
+    public static function createFromFile($file)
     {
         $profilePicture = new ProfilePictureDomainModel();
 
         $profilePicture->setFilename($file->getFilename());
 
-        $profilePicture->moveToPublicDirectory(
-            $file,
-            $profilePicture->getImageDirectory());
+        ProfilePictureDomainModel::moveToPublicDirectory($file);
 
         return $profilePicture;
     }
@@ -108,7 +107,7 @@ class ProfilePictureDomainModel
      * @param String $filename
      * @return ProfilePictureDomainModel
      */
-    public static function createProfilePicture($filename)
+    public static function create($filename)
     {
         $profilePicture = new ProfilePictureDomainModel();
 

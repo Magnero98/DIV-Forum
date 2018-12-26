@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Domains\DomainModels\CategoryDomainModel;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -14,28 +17,40 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = CategoryDomainModel::showAllCategory();
+        return view('categories.index', ["categories" => $categories]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get a validator for create category request.
+     * @author Alvent
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function create()
-    {
-        //
+
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'name' => 'required|max:10',
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category to DB.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $validator = $this->validator($request->all());
+
+        if($validator->fails()){
+             return redirect()->route('categories.index')->withErrors($validator)->withInput(Input::all());
+        }
+
+        CategoryDomainModel::createCategoryFromArray($request->all());
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -80,6 +95,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CategoryDomainModel::deleteCategory($id);
+        return back();
     }
 }

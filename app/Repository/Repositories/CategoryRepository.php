@@ -35,11 +35,15 @@ Class CategoryRepository implements Repository{
      * @author Alvent
      *
      * @param array $data
-     * @return Illuminate\Database\Eloquent\Model
      */
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        $category = new Category();
+        $category->name = $data['name'];
+        $category->created_at = date('Y-m-d H:i:s');
+        $category->updated_at = date('Y-m-d H:i:s');
+
+        $category->save();
     }
 
     /**
@@ -63,6 +67,7 @@ Class CategoryRepository implements Repository{
      */
     public function delete($id)
     {
-
+        $category = Category::find($id);
+        $category->delete();
     }
 }

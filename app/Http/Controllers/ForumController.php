@@ -19,9 +19,10 @@ class ForumController extends Controller
      * @author Alvent
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $forums = ForumDomainModel::showAllForum();
+        $forums = ForumDomainModel::showAllForum(5, $request->search);
         return view('forums.index', ["forums" => $forums]);
     }
 
@@ -147,19 +148,6 @@ class ForumController extends Controller
     {
         //
     }
-
-    /**
-    * Search forum by title and category name 
-    * @author Alvent 
-    * @param \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function searchForum(Request $request){
-        $search = $request->get('search');
-        $forums = ForumDomainModel::searchForum($search);
-        $forums->appends($request->only('search'));
-        return view('forums.index', ["forums" => $forums]); 
-    } 
 
     /**
     * show all forum owned 

@@ -16,9 +16,13 @@ Class ForumRepository implements Repository{
      * @param Integer $perPage = 5
      * @return Collection of Illuminate\Database\Eloquent\Model
      */
-    public function all($perPage = 5)
+    public function all($perPage = 5, $search='')
     {
-        $forums = Forum::orderBy('created_at','desc')->paginate($perPage);
+        $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
+        {
+            $q->where('name', 'like', '%'.$search.'%');
+        })->orderBy('forums.created_at','desc')->paginate(5)->appends(['search' => $search]);
+
         return $forums;
     }
 
@@ -127,14 +131,14 @@ Class ForumRepository implements Repository{
     * @param string $search
     * @return Collection of Repository/DataModels/Forum
     */
-    public function search($search){
-        $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
-        {
-            $q->where('name', 'like', '%'.$search.'%');
-        })->orderBy('forums.created_at','desc')->paginate(5);
+    // public function search($search){
+    //     $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
+    //     {
+    //         $q->where('name', 'like', '%'.$search.'%');
+    //     })->orderBy('forums.created_at','desc')->paginate(5);
 
-        return $forums;
-    }
+    //     return $forums;
+    // }
 
     /**
     * Display forum owned by user  

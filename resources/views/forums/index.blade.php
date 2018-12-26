@@ -17,7 +17,7 @@
 
                 </div>
 
-                <form action="{{ route('search') }}" method="get" role="search">
+                <form action="{{ route('forums.index') }}" method="get" role="search">
                     {{ csrf_field() }}
                     <div class="input-group">
                         <input type="text" class="form-control" name="search"

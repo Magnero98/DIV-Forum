@@ -112,9 +112,9 @@ Class ForumDomainModel extends DomainModel{
 	* @return Collection of Repository/DataModels/Forum
 	*/
 
-    public static function showAllForum(){
+    public static function showAllForum($perPage = 5, $search=''){
     	$forumRepository = new ForumRepository(); 
-        $forums = $forumRepository->all();
+        $forums = $forumRepository->all(5, $search);
         return $forums;
     }
 

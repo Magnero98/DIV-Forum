@@ -42,6 +42,7 @@
                     </a>
                         @if(App\Domains\DomainModels\UserDomainModel::getAuthUser()->getRoleId() == 1)
                             <a class="navbar-brand" href="{{ route('masterForum')}}">Master Forum</a>
+                            <a class="navbar-brand" href="{{ route('categories.index')}}">Master Category</a>
                         @endif
 
                     @endguest

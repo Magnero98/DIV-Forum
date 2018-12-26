@@ -34,3 +34,5 @@ Route::post('/forums/{id}/updateStatus', 'ForumController@updateStatus');
 Route::get('/masterForum', 'ForumController@masterForum')->name('masterForum');
 
 Route::resource('/messages', 'MessageController');
+
+Route::resource('categories', 'CategoryController');

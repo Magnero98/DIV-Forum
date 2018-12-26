@@ -73,6 +73,17 @@ Class ForumDomainModel extends DomainModel{
     }
 
     /**
+     * Method to update specified forum status 
+     * @author Alvent
+     * @param $id
+     */
+
+    public static function updateStatus($id){
+        $forumRepository = new ForumRepository();
+        $forumRepository->updateStatus($id);
+    }
+
+    /**
     * Show forum with specified id
     * @author Alvent
     * @param $id

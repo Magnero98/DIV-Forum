@@ -131,6 +131,19 @@ class ForumController extends Controller
     }
 
     /**
+     * Update the specified forum status in database.
+     * @author Alvent
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function updateStatus($id){
+        ForumDomainModel::updateStatus($id);
+
+        return redirect()->route('myForum');
+    }
+
+    /**
      * Remove the specified resource from storage.
      * @author Alvent
      * @param  int  $id

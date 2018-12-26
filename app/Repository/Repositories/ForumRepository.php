@@ -74,6 +74,17 @@ Class ForumRepository implements Repository{
         $forum->save();
     }
 
+    /**
+     * Update forum status with specified id inside Database
+     * @author Alvent
+     * @param $id
+     */
+    public function updateStatus($id){
+        $forum = Forum::find($id); 
+        $forum->forum_status_id = 2;
+        $forum->save();
+    }
+
 
     /**
      * Update data with specified id inside Database with updated model

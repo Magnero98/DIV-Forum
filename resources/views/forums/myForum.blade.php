@@ -12,6 +12,7 @@
                 @foreach($forums as $forum)
                     <tr>
                         <td>{{$forum->title}}</td>
+                        @if($forum->forum_status_id == 1)
                         <td>
                             <form action="{{route('forums.edit', $forum->id)}}" method="get">
                                 {{csrf_field()}}
@@ -20,12 +21,12 @@
                             </form>
                         </td>
                         <td>
-                            <form action="{{route('forums.destroy', $forum->id)}}" method="post">
+                            <form action="{{ url('forums/'.$forum->id.'/updateStatus') }}" method="post">
                                 {{csrf_field()}}
-                                <input type="hidden" name="_method" value="delete"/>
-                                <button>Delete</button>
+                                <button>Close</button>
                             </form>
                         </td>
+                        @endif
                     </tr>
                     <tr>
                         <td>

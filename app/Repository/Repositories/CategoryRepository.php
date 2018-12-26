@@ -27,7 +27,8 @@ Class CategoryRepository implements Repository{
      */
     public function find($id)
     {
-        // TODO: Implement find() method.
+        $category = Category::find($id);
+        return $category;
     }
 
     /**
@@ -49,13 +50,16 @@ Class CategoryRepository implements Repository{
     /**
      * Update data with specified id inside Database with updated model
      * @author Alvent
-     *
      * @param array $data
+     * @param $id
      * @return Boolean
      */
-    public function update(array $data)
+    public function update(array $data, $id)
     {
-        // TODO: Implement update() method.
+        $category = Category::find($id); 
+        $category->name = $data['name']; 
+
+        $category->save();
     }
 
     /**

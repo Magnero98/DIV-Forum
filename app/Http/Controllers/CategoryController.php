@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @author Alvent
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -36,7 +36,7 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created category to DB.
-     *
+     * @author Alvent
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -55,7 +55,7 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * @author Alvent
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -66,30 +66,39 @@ class CategoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * @author Alvent
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $category = CategoryDomainModel::findCategory($id);
+        return view('categories.edit', ["category" => $category]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
+     * @author Alvent
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = $this->validator($request->all());
+
+        if($validator->fails()){
+           return redirect()->route('categories.edit', $id)->withErrors($validator);
+        }
+
+        CategoryDomainModel::updateCategoryFromArray($request->all(), $id);
+
+        return redirect()->route('categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @author Alvent
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

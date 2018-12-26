@@ -115,7 +115,7 @@ Class ForumRepository implements Repository{
 
     public function myForum(){
         $userId = UserDomainModel::getAuthUser()->getId();
-        return Forum::where('user_id','=',$userId)->paginate(5);
+        return Forum::where('user_id','=',$userId)->orderBy('created_at','desc')->paginate(5);
     }
 
 

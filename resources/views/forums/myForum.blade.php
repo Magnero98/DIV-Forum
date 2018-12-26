@@ -15,6 +15,9 @@
                 </div>
                 @endforeach
 
+                <div style="text-align: center;">
+                	{{ $forums->links() }}
+            	</div>
             </div>
         </div>
     </div>

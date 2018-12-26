@@ -4,6 +4,8 @@
 namespace App\Repository\Repositories;
 use App\Repository\DataModels\Forum;
 use App\Domains\DomainModels\DomainModel;
+use App\Domains\DomainModels\UserDomainModel;
+
 
 Class ForumRepository implements Repository{
 
@@ -16,7 +18,7 @@ Class ForumRepository implements Repository{
      */
     public function all($perPage = 5)
     {
-        $forums = Forum::paginate($perPage);
+        $forums = Forum::orderBy('created_at','desc')->paginate($perPage);
         return $forums;
     }
 
@@ -28,7 +30,8 @@ Class ForumRepository implements Repository{
      */
     public function find($id)
     {
-        // TODO: Implement find() method.
+        $forum = Forum::find($id);
+        return $forum;
     }
 
     /**
@@ -40,8 +43,48 @@ Class ForumRepository implements Repository{
      */
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        $forum = new Forum();
+        $forum->user_id = UserDomainModel::getAuthUser()->getId();
+        $forum->category_id = $data['category'];
+        $forum->forum_status_id = 1;
+        $forum->title = $data['name'];
+        $forum->description = $data['description'];
+        $forum->created_at = date('Y-m-d H:i:s');
+        $forum->updated_at = date('Y-m-d H:i:s');
+
+        $forum->save();
+
+        return $forum;
     }
+
+    /**
+     * Update data with specified id inside Database with updated model
+     * @author Alvent
+     * @param $id
+     * @param array $data
+     * @return Boolean
+     */
+    public function updateForum(array $data, $id)
+    {
+        $forum = Forum::find($id);
+        $forum->title = $data['name'];
+        $forum->category_id = $data['category'];
+        $forum->description = $data['description'];
+
+        $forum->save();
+    }
+
+    /**
+     * Update forum status with specified id inside Database
+     * @author Alvent
+     * @param $id
+     */
+    public function updateStatus($id){
+        $forum = Forum::find($id); 
+        $forum->forum_status_id = 2;
+        $forum->save();
+    }
+
 
     /**
      * Update data with specified id inside Database with updated model
@@ -50,9 +93,8 @@ Class ForumRepository implements Repository{
      * @param array $data
      * @return Boolean
      */
-    public function update(array $data)
-    {
-        // TODO: Implement update() method.
+    public function update(array $data){
+
     }
 
     /**
@@ -75,8 +117,34 @@ Class ForumRepository implements Repository{
      * @param Integer $id
      * @return Boolean
      */
-    public static function showForum($id){
+    public function showForum($id){
 
+    }
+
+    /**
+    * Display forum by title or name     
+    * @author Alvent 
+    * @param string $search
+    * @return Collection of Repository/DataModels/Forum
+    */
+    public function search($search){
+        $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
+        {
+            $q->where('name', 'like', '%'.$search.'%');
+        })->orderBy('forums.created_at','desc')->paginate(5);
+
+        return $forums;
+    }
+
+    /**
+    * Display forum owned by user  
+    * @author Alvent 
+    * @return Collection of Repository/DataModels/Forum
+    */
+
+    public function myForum(){
+        $userId = UserDomainModel::getAuthUser()->getId();
+        return Forum::where('user_id','=',$userId)->orderBy('created_at','desc')->paginate(5);
     }
 
 

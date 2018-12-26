@@ -51,34 +51,48 @@ Class ForumDomainModel extends DomainModel{
      * @author Alvent
      *
      * @param array $data
-     * @return ForumDomainModel
+     * @return Repository\DataModels\Forum
      */
      public static function createForumFromArray(array $data)
     {
-
-    }
-
-	/**
-     * Factory Method to create ForumDomainModel from model
-     * @author Alvent
-     *
-     * @param Repository/DataModels/Forum $model
-     * @return ForumDomainModel
-     */
-    public static function createForumFromForumDataModel(Forum $model)
-    {
-
+        $forumRepository = new ForumRepository();
+        return $forumRepository->create($data);
     }
 
     /**
-    * Show all Forum created by specified user id
+     * Method to update specified forum from array of Data
+     * @author Alvent
+     * @param $id
+     * @param array $data
+     * @return Repository\DataModels\Forum
+     */
+     public static function updateForumFromArray(array $data, $id)
+    {
+        $forumRepository = new ForumRepository();
+        $forumRepository->updateForum($data, $id);
+    }
+
+    /**
+     * Method to update specified forum status 
+     * @author Alvent
+     * @param $id
+     */
+
+    public static function updateStatus($id){
+        $forumRepository = new ForumRepository();
+        $forumRepository->updateStatus($id);
+    }
+
+    /**
+    * Show forum with specified id
     * @author Alvent
     * @param $id
-	* @return  Collection of Repository/DataModels/Forum
+	* @return Repository/DataModels/Forum
 	*/
 
     public static function showForum($id){
-
+        $forumRepository = new ForumRepository();
+        return $forumRepository->find($id);
     }
 
     /**
@@ -104,7 +118,28 @@ Class ForumDomainModel extends DomainModel{
         return $forums;
     }
 
+    /**
+    * Display forum by title or name     
+    * @author Alvent 
+    * @param string $search
+    * @return Collection of Repository/DataModels/Forum
+    */
+    public static function searchForum($search){
+        $forumRepository = new ForumRepository();
+        $forums = $forumRepository->search($search);
+        return $forums;
+    }
 
+    /**
+    * Display all forum owned    
+    * @author Alvent 
+    * @return Collection of Repository/DataModels/Forum
+    */
+    public static function myForum(){
+        $forumRepository = new ForumRepository();
+        $forums = $forumRepository->myForum();
+        return $forums;
+    }
 
 }
 

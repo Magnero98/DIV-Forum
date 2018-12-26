@@ -8,14 +8,15 @@
                 <div class="panel-heading">Forum Data</div>
 
                 <div class="panel-body">
-                	<form class="form-horizontal" method="POST" action="{{ route('forums.store') }}" enctype="multipart/form-data">
+                	<form class="form-horizontal" method="POST" action="{{ route('forums.update', $forum->id) }}" enctype="multipart/form-data">
+                		<input type="hidden" name="_method" value="put"/>
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ $forum->title }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -32,7 +33,7 @@
                                 <select name="category" class="form-control">
                                     <option value="">--Select--</option>
                                     @foreach($categories as $listCategory)
-                                        <option value="{{$listCategory->id}}" @if( old('category') == $listCategory->id)selected="selected" @endif>{{$listCategory->name}}</option>
+                                        <option value="{{$listCategory->id}}" @if( $forum->category_id == $listCategory->id)selected="selected" @endif>{{$listCategory->name}}</option>
                                     @endforeach
                                 </select>
 
@@ -48,23 +49,24 @@
                             <label for="description" class="col-md-4 control-label">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" >
+                                <input id="description" type="text" class="form-control" name="description" value="{{ $forum->description }}" >
                             </div>
                         </div>
 
                         <div class="form-group" style="padding-top: 20px">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Create Forum
+                                    Update Forum
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
+
 
 @endsection 

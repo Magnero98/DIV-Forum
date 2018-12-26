@@ -91,7 +91,8 @@ Class MessageDomainModel extends DomainModel{
 	*/
 
     public static function showMessage($id){
-    	$messages = MessageRepository::showMessage($id);
+        $messageRepository = new MessageRepository();
+    	$messages = $messageRepository->showMessage($id);
     	return $messages;
     }
 

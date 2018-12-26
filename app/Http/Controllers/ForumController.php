@@ -32,13 +32,13 @@ class ForumController extends Controller
      */
     public function create()
     {   
-        $categories = CategoryDomainModel::showAllCategory();
-        $input = [
-            'name' => '',
-            'category' => '',
-            'description' => ''
-        ];
-        return view('forums.create', compact('input'), compact('categories'));
+        $user = UserDomainModel::getAuthUser();
+        if($user){
+            $categories = CategoryDomainModel::showAllCategory();
+            return view('forums.create', compact('categories'));
+        }
+        
+        return redirect('login');
     }
 
     /**
@@ -49,30 +49,30 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'category' => 'required'
-        ]);
-        //
+            
+        $validator = $this->validator($request->all());
 
         if($validator->fails()){
-            $categories = CategoryDomainModel::showAllCategory();
-            return view('forums.create',["categories" => $categories])->
-            withErrors($validator)->withInput(Input::all());
+            return redirect()->route('forums.create')->withErrors($validator)->withInput(Input::all());
         }
 
-        $forum = new Forum();
-        $forum->user_id = UserDomainModel::getAuthUser()->getId();
-        $forum->category_id = $request->get('category');
-        $forum->forum_status_id = 1;
-        $forum->title = $request->get('name');
-        $forum->description = $request->get('description');
-        $forum->created_at = date('Y-m-d H:i:s');
-        $forum->updated_at = date('Y-m-d H:i:s');
+        ForumDomainModel::createForumFromArray($request->all());
 
-        $forum->save();
         return redirect()->route('forums.index');
+    }
+
+    /**
+     * Get a validator for create forum request.
+     * @author Alvent
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'name' => 'required',
+            'category' => 'required',
+        ]);
     }
 
     /**
@@ -99,11 +99,14 @@ class ForumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $forum = ForumDomainModel::showForum($id);
+        $categories = CategoryDomainModel::showAllCategory();
+
+        return view('forums.edit',["forum" => $forum], ["categories" => $categories]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified forum in database.
      * @author Alvent
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -111,7 +114,27 @@ class ForumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = $this->validator($request->all());
+        if($validator->fails()){
+           return redirect()->route('forums.edit', $id)->withErrors($validator);
+        }
+
+        ForumDomainModel::updateForumFromArray($request->all(), $id);
+
+        return redirect()->route('myForum');
+    }
+
+    /**
+     * Update the specified forum status in database.
+     * @author Alvent
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function updateStatus($id){
+        ForumDomainModel::updateStatus($id);
+
+        return redirect()->route('myForum');
     }
 
     /**
@@ -125,4 +148,27 @@ class ForumController extends Controller
         //
     }
 
+    /**
+    * Search forum by title and category name 
+    * @author Alvent 
+    * @param \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function searchForum(Request $request){
+        $search = $request->get('search');
+        $forums = ForumDomainModel::searchForum($search);
+        $forums->appends($request->only('search'));
+        return view('forums.index', ["forums" => $forums]); 
+    } 
+
+    /**
+    * show all forum owned 
+    * @author Alvent 
+    * @param \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function myForum(){
+        $forums = ForumDomainModel::myForum();
+        return view('forums.myForum', ["forums" => $forums]);
+    } 
 }

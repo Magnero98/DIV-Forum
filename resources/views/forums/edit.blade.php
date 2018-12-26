@@ -9,6 +9,7 @@
 
                 <div class="panel-body">
                 	<form class="form-horizontal" method="POST" action="{{ route('forums.update', $forum->id) }}" enctype="multipart/form-data">
+                		<input type="hidden" name="_method" value="put"/>
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -55,7 +56,7 @@
                         <div class="form-group" style="padding-top: 20px">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Create Forum
+                                    Update Forum
                                 </button>
                             </div>
                         </div>

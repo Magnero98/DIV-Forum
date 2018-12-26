@@ -60,13 +60,30 @@ Class ForumRepository implements Repository{
     /**
      * Update data with specified id inside Database with updated model
      * @author Alvent
+     * @param $id
+     * @param array $data
+     * @return Boolean
+     */
+    public function updateForum(array $data, $id)
+    {
+        $forum = Forum::find($id);
+        $forum->title = $data['name'];
+        $forum->category_id = $data['category'];
+        $forum->description = $data['description'];
+
+        $forum->save();
+    }
+
+
+    /**
+     * Update data with specified id inside Database with updated model
+     * @author Alvent
      *
      * @param array $data
      * @return Boolean
      */
-    public function update(array $data)
-    {
-        // TODO: Implement update() method.
+    public function update(array $data){
+
     }
 
     /**

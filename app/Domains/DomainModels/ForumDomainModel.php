@@ -60,6 +60,19 @@ Class ForumDomainModel extends DomainModel{
     }
 
     /**
+     * Method to update specified forum from array of Data
+     * @author Alvent
+     * @param $id
+     * @param array $data
+     * @return Repository\DataModels\Forum
+     */
+     public static function updateForumFromArray(array $data, $id)
+    {
+        $forumRepository = new ForumRepository();
+        $forumRepository->updateForum($data, $id);
+    }
+
+    /**
     * Show forum with specified id
     * @author Alvent
     * @param $id

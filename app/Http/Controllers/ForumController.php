@@ -107,7 +107,7 @@ class ForumController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified forum in database.
      * @author Alvent
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -115,7 +115,19 @@ class ForumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = $this->validator($request->all());
+        if($validator->fails()){
+            $categories = CategoryDomainModel::showAllCategory();
+            $forum = ForumDomainModel::showForum($id);
+            $forum->title = $request->get('name');
+            $forum->category_id = $request->get('category');
+            $forum->description = $request->get('description');
+            return view('forums.edit',["categories" => $categories],["forum" => $forum])->withErrors($validator)->withInput(Input::all());
+        }
+
+        ForumDomainModel::updateForumFromArray($request->all(), $id);
+
+        return redirect()->route('myForum');
     }
 
     /**

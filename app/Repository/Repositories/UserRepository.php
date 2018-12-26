@@ -53,7 +53,7 @@ class UserRepository implements Repository
     public function create(array $data)
     {
         return User::create([
-            'role_id' => UserRoleEnumeration::User,
+            'role_id' => userRole(),
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

@@ -43,7 +43,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -57,7 +57,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
                             </div>
                         </div>
 
@@ -127,7 +127,7 @@
                             <label for="picture" class="col-md-4 control-label">Photo</label>
 
                             <div class="col-md-6">
-                                <input id="picture" type="file" name="picture" required>
+                                <input id="picture" type="file" name="picture" value="{{ old('picture') }}" required>
 
                                 @if ($errors->has('picture'))
                                     <span class="help-block">

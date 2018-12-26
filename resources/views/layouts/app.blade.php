@@ -74,7 +74,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="{{ route('inbox') }}">
+                                        <a href="{{ route('messages.index') }}">
                                             Inbox
                                         </a>
                                     </li>

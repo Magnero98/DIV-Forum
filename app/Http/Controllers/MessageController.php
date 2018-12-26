@@ -16,7 +16,13 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $user = UserDomainModel::getAuthUser();
+        if($user){
+            $messages = MessageDomainModel::showMessage($user->getId());
+            return view('messages.show', ["messages" => $messages]);
+        }
+
+        return redirect('login');
     }
 
     /**
@@ -49,22 +55,6 @@ class MessageController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Display the specified message according to user id.
-     * @author Alvent
-     * @return \Illuminate\Http\Response
-     */
-    public function showCurrentUserInbox()
-    {
-        $user = UserDomainModel::getAuthUser();
-        if($user){
-            $messages = MessageDomainModel::showMessage($user->getId());
-            return view('messages.show', ["messages" => $messages]);
-        }
-
-        return redirect('login');
     }
 
     /**

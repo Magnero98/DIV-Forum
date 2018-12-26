@@ -33,4 +33,3 @@ Route::get('/myforum', 'ForumController@myForum')->name('myForum');
 Route::post('/forums/{id}/updateStatus', 'ForumController@updateStatus');
 
 Route::resource('/messages', 'MessageController');
-Route::get('/messages', 'MessageController@showCurrentUserInbox')->name('inbox');

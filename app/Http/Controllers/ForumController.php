@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domains\DomainModels\ThreadDomainModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domains\DomainModels\ForumDomainModel;
@@ -76,13 +77,18 @@ class ForumController extends Controller
 
     /**
      * Display the specified resource.
-     * @author Alvent
+     * @author Yansen
+     *
+     * @param \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $threads = ThreadDomainModel::getAllForumThread($id, 2, $request->keyword);
+        return view('forums.show')
+            ->with('forum_id', $id)
+            ->with('threads', $threads);
     }
 
     /**

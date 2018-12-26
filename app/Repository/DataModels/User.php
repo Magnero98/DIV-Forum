@@ -38,6 +38,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    /**
+     * User relation: Many user belongs to One Role
+     * @author Yansen
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
     /**
      * Popularities relation: Many Users belongs to many Users
      * @author Yansen
@@ -62,5 +74,17 @@ class User extends Authenticatable
      */
     public function messages(){
         return $this->hasMany('App\Repository\DataModels\Message', 'receiver_id');
+    }
+
+
+    /**
+     * User relation: One User has many threads
+     * @author Yansen
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function threads()
+    {
+        return $this->hasMany(Thread::class);
     }
 }

@@ -54,17 +54,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * @author Alvent
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      * @author Alvent
      * @param  int  $id

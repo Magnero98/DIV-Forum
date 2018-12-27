@@ -59,14 +59,25 @@
                 @endroles
             </div>
         </div>
+        @if(!isAuthUserProfile($user->id))
         <div class="container-fluid">
             <form action="{{ route('messages.store') }}" method="POST">
+                {{ csrf_field() }}
                 <label>Message</label>
                 <br>
+                <input type="hidden" name="receiver_id" value="{{$user->id}}">
+                <input type="hidden" name="sender_id" value="{{ authUserDomain()->getId() }}">
                 <textarea rows="3" name="content"></textarea>
+
+                @if ($errors->has('content'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('content') }}</strong>
+                    </span>
+                @endif
                 <br>
                 <button type="submit">Send</button>
             </form>
         </div>
+        @endif
     </div>
 @endsection

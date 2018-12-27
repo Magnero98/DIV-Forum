@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domains\DomainModels\UserDomainModel;
 use App\Domains\DomainModels\MessageDomainModel;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class MessageController extends Controller
 {
@@ -16,6 +18,7 @@ class MessageController extends Controller
      */
     public function index()
     {
+
         $user = UserDomainModel::getAuthUser();
         if($user){
             $messages = MessageDomainModel::showMessage(10, $user->getId());
@@ -26,16 +29,6 @@ class MessageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @author Alvent
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      * @author Alvent
      * @param  \Illuminate\Http\Request  $request
@@ -43,42 +36,31 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $this->validator($request->all());
+
+        if($validator->fails()){
+            return back()->withErrors($validator)->withInput(Input::all());
+        }
+
+        MessageDomainModel::createMessageFromArray($request->all());
+
+        return back();
     }
 
     /**
-     * Display the specified resource.
+     * Get a validator for creating message.
      * @author Alvent
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function show($id)
-    {
-        //
+
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'receiver_id' => 'required',
+            'content' => 'required',
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @author Alvent
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @author Alvent
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified message from db.

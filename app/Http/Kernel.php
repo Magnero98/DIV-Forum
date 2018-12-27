@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\userPageAuthorization\RedirectIfUser;
+use App\Http\Middleware\UserPageAuthorization\RedirectIfUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -58,8 +58,10 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'isUser' => \App\Http\Middleware\userPageAuthorization\RedirectIfUser::class,
-        'isAdmin' => \App\Http\Middleware\userPageAuthorization\RedirectIfAdmin::class,
-        'isLoggedIn' => \App\Http\Middleware\userPageAuthorization\RedirectIfLoggedIn::class,
+        'isUser' => \App\Http\Middleware\UserPageAuthorization\RedirectIfUser::class,
+        'isAdmin' => \App\Http\Middleware\UserPageAuthorization\RedirectIfAdmin::class,
+        'isLoggedIn' => \App\Http\Middleware\UserPageAuthorization\RedirectIfLoggedIn::class,
+        'validateUserData' => \App\Http\Middleware\User\ValidateUserData::class,
+        'validateThreadData' => \App\Http\Middleware\Thread\ValidateThreadData::class,
     ];
 }

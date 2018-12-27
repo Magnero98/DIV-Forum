@@ -16,7 +16,9 @@ return array(
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
     'f0906e6318348a765ffb6eb24e0d0938' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
     '58571171fd5812e6e447dce228f52f4d' => $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
-    '75c4045fabce667f42442e32366b4986' => $baseDir . '/app/Helpers/UserDomainHelper.php',
-    '3db4a19d9047a6532ce068ecb576c587' => $baseDir . '/app/Helpers/RoleDomainHelper.php',
+    '65deeb3592fb32f82ac543736610ebd8' => $baseDir . '/app/Helpers/UserHelper.php',
+    'af5c7414008ffae8561d0514ad128022' => $baseDir . '/app/Helpers/RoleHelper.php',
+    '037b1a60c791da2569b63d7e67af6bd9' => $baseDir . '/app/Helpers/ThreadHelper.php',
+    '2d98231855943f5205bb581531578aaf' => $baseDir . '/app/Helpers/PopularityHelper.php',
     'd28ddd947c0ffd3ff0eaaebeef0b30f0' => $baseDir . '/app/Helpers/BladeHelper.php',
 );

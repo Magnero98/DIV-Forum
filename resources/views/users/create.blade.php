@@ -8,7 +8,7 @@
                     <div class="panel-heading">Register</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        <form class="form-horizontal" method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -43,7 +43,7 @@
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}" required>
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -57,7 +57,7 @@
                                 <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
                                 </div>
                             </div>
 
@@ -137,19 +137,10 @@
                                 </div>
                             </div>
 
-                            <div class="checkbox {{ $errors->has('password') ? ' has-error' : '' }}">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-9">
-                                    <label class="text-center">
-                                        <input id="agreement" type="checkbox" name="agreement" required>By registering to this website, I agree term and condition
-                                    </label>
-                                </div>
-                            </div>
-
                             <div class="form-group" style="padding-top: 20px">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Register
+                                        Add
                                     </button>
                                 </div>
                             </div>

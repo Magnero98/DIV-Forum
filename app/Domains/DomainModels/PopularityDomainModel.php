@@ -81,10 +81,24 @@ class PopularityDomainModel
      * @param Integer $targetUserId
      * @return Boolean
      */
-    public static function isVoted($voterUserId, $targetUserId)
+    public static function findPopularity($voterUserId, $targetUserId)
     {
         $popularityRepository = new PopularityRepository();
-        return (is_null($popularityRepository->find($voterUserId, $targetUserId)))
+        return $popularityRepository->find($voterUserId, $targetUserId);
+    }
+
+
+    /**
+     * Check if this user has gave a vote to target user
+     * @author Yansen
+     *
+     * @param Integer $voterUserId
+     * @param Integer $targetUserId
+     * @return Boolean
+     */
+    public static function isVoted($voterUserId, $targetUserId)
+    {
+        return is_null(self::findPopularity($voterUserId, $targetUserId))
             ? false
             : true;
     }

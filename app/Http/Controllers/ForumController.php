@@ -85,9 +85,10 @@ class ForumController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $threads = ThreadDomainModel::getAllForumThread($id, 2, $request->keyword);
+        $forum = ForumDomainModel::showForum($id);
+        $threads = ThreadDomainModel::getAllForumThread($id, 5, $request->keyword);
         return view('forums.show')
-            ->with('forum_id', $id)
+            ->with('forum', $forum)
             ->with('threads', $threads);
     }
 

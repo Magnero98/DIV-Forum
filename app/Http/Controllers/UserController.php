@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    /**
+     * UserDomainModel Constructor
+     * @author Yansen
+     */
+    public function __construct()
+    {
+        $this->middleware(
+            'validateUserData',
+            ['only' => ['store', 'update']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +31,7 @@ class UserController extends Controller
         return view('users.index')
             ->with('users', $users);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -39,6 +52,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         UserDomainModel::addUser($request->all());
+
         return redirect(route('users.index'));
     }
 
@@ -78,6 +92,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         UserDomainModel::editUser($request->all(), $id);
+
         return redirect(route('users.index'));
     }
 

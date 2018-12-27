@@ -8,6 +8,7 @@
 
 namespace App\Domains\DomainModels;
 
+use Illuminate\Support\Facades\File;
 
 class ProfilePictureDomainModel
 {
@@ -98,6 +99,12 @@ class ProfilePictureDomainModel
         return $profilePicture;
     }
 
+    public static function delete($filename)
+    {
+        $filePath = public_path() . '\\uploads\\profile_pictures\\' . $filename;
+        if(File::exists($filePath))
+            File::delete($filePath);
+    }
 
     /**
      * Factory method to create Profile Picture

@@ -70,4 +70,10 @@ class ThreadDomainModel extends DomainModel
     {
         return (new ThreadRepository())->delete($id);
     }
+
+    public static function isAuthUserThread($id)
+    {
+        $thread = self::findThread($id);
+        return ($thread->user_id == authUserDomain()->getId());
+    }
 }

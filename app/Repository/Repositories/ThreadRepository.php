@@ -35,7 +35,8 @@ class ThreadRepository implements Repository
                     ->orWhereHas('user', function ($query) use ($keyword){
                         $query->where('name', 'LIKE', '%' . $keyword . '%');
                     });
-            })->paginate($perPage)
+            })->orderBy('created_at', 'DESC')
+            ->paginate($perPage)
             ->appends(['keyword' => $keyword]);
     }
 

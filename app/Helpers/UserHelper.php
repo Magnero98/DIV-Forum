@@ -13,3 +13,11 @@ if(!function_exists('authUserDomain()'))
         return \App\Domains\DomainModels\UserDomainModel::getAuthUser();
     }
 }
+
+if(!function_exists('isAuthUserProfile'))
+{
+    function isAuthUserProfile($userId)
+    {
+        return (authUserDomain()->getId() == $userId);
+    }
+}

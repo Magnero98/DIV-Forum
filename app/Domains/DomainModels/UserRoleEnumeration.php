@@ -12,7 +12,7 @@ namespace App\Domains\DomainModels;
 abstract class UserRoleEnumeration
 {
     const Admin = 1;
-    const User = 2;
+    const Member = 2;
 
     /**
      * To get name of enumeration constant
@@ -23,6 +23,6 @@ abstract class UserRoleEnumeration
     const valueName = array(
         "",
         "Admin",
-        "User"
+        "Member"
     );
 }

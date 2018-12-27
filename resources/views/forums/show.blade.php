@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div style="font-size: 1.5vw">{{$forum->title}} <button>{{$forum->forum_status->name }}</button></div>
                 <div>Category: {{ $forum->category->name }}</div>
-                <div>Owner: {{ $forum->user->name }}</div>
+                <div>Owner: <a href="{{ route('users.show', ['id' => $forum->user_id]) }}">{{ $forum->user->name }}</a></div>
                 <div>Posted at: {{ $forum->created_at->format('d M y h:i:s')}}</div><br>
                 <div>Description: </div>
                 <div>{{ $forum->description }}</div>

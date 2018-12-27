@@ -65,6 +65,8 @@
                 {{ csrf_field() }}
                 <label>Message</label>
                 <br>
+                <input type="hidden" name="receiver_id" value="{{$user->id}}">
+                <input type="hidden" name="sender_id" value="{{ authUserDomain()->getId() }}">
                 <textarea rows="3" name="content"></textarea>
                 <br>
                 <button type="submit">Send</button>

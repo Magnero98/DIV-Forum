@@ -47,28 +47,16 @@ Class MessageDomainModel extends DomainModel{
         $this->messageRepository = new MessageRepository();
     }
 
-
-	/**
-     * Add new message to the database
-     * @author Alvent
-     *
-     * @return App\Repository\DataModels\User
-     */
-    public function addMessage()
-    {
-
-    }
-
     /**
-     * Factory Method to create MessageDomainModel from array of Data
+     * insert message from array of Data to database
      * @author Alvent
      *
      * @param array $data
-     * @return MessageDomainModel
      */
      public static function createMessageFromArray(array $data)
     {
-
+        $messageRepository = new MessageRepository();
+        return $messageRepository->create($data);
     }
 
 	/**

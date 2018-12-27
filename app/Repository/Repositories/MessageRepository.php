@@ -39,7 +39,7 @@ class MessageRepository implements Repository
     }
 
     /**
-     * Insert new model to Database
+     * Insert message from array data to Database
      * @author Alvent
      *
      * @param array $data
@@ -47,7 +47,16 @@ class MessageRepository implements Repository
      */
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        $message = new Message();
+        $message->sender_id = $data['sender_id'];
+        $message->receiver_id = $data['receiver_id']; 
+        $message->content = $data['content']; 
+        $message->created_at = date('Y-m-d H:i:s');
+        $message->updated_at = date('Y-m-d H:i:s');
+
+        $message->save();
+
+        return $message();
     }
 
     /**

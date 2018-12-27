@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpUndefinedNamespaceInspection */
+
 /**
  * Created by PhpStorm.
  * User: User
@@ -9,6 +10,7 @@
 namespace App\Domains\DomainModels;
 
 
+use App\Repository\Repositories\Repository;
 use App\Repository\Repositories\ThreadRepository;
 
 class ThreadDomainModel extends DomainModel
@@ -46,31 +48,77 @@ class ThreadDomainModel extends DomainModel
     public function setCreatedAt($createdAt)	{ $this->createdAt = $createdAt; return $this; }
     public function setUpdatedAt($updatedAt)	{ $this->updatedAt = $updatedAt; return $this; }
 
+    /**
+     * Retrieve all threads for specified forum
+     * @author Yansen
+     *
+     * @param Integer $forumId
+     * @param Integer $perPage
+     * @param String $keyword
+     * @return \App\Repository\Repositories\Collection
+     */
     public static function getAllForumThread($forumId, $perPage = 10, $keyword = '')
     {
         return (new ThreadRepository())->all($forumId, $perPage, $keyword);
     }
 
+    /**
+     * Retrieve specified thread
+     * @author Yansen
+     *
+     * @param Integer $id
+     * @return Repository\DataModels\Thread
+     */
     public static function findThread($id)
     {
         return (new ThreadRepository())->find($id);
     }
 
+    /**
+     * Insert new Thread to Database
+     * @author Yansen
+     *
+     * @param array $data
+     * @return Repository\DataModels\Thread
+     */
     public static function addThread(array $data)
     {
         return (new ThreadRepository())->create($data);
     }
 
+    /**
+     * Update specified thread in database
+     * @author Yansen
+     *
+     * @param array $data
+     * @param Integer $id
+     * @return Boolean
+     */
     public static function editThread(array $data, $id)
     {
         return (new ThreadRepository())->update($data, $id);
     }
 
+    /**
+     * Delete specified thread
+     * @author Yansen
+     *
+     * @param Integer $id
+     * @return Boolean
+     */
     public static function deleteThread($id)
     {
         return (new ThreadRepository())->delete($id);
     }
 
+    /**
+     * Check if the thread with specified id belongs to
+     * Authenticate User
+     * @author Yansen
+     *
+     * @param Integer $id
+     * @return Boolean
+     */
     public static function isAuthUserThread($id)
     {
         $thread = self::findThread($id);

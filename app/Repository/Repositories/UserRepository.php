@@ -28,6 +28,7 @@ class UserRepository implements Repository
     public function all($perPage = 10)
     {
         return User::where('id', '!=', 0)
+            ->orderBy('created_at', 'DESC')
             ->paginate($perPage);
     }
 

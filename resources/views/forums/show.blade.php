@@ -7,7 +7,13 @@
             <div class="panel-body">
                 <div style="font-size: 1.5vw">{{$forum->title}} <button>{{$forum->forum_status->name }}</button></div>
                 <div>Category: {{ $forum->category->name }}</div>
-                <div>Owner: <a href="{{ route('users.show', ['id' => $forum->user_id]) }}">{{ $forum->user->name }}</a></div>
+                <div>Owner: 
+                    @guest 
+                    {{ $forum->user->name }}
+                    @else
+                    <a href="{{ route('users.show', ['id' => $forum->user_id]) }}">{{ $forum->user->name }}</a>
+                    @endguest
+                </div>
                 <div>Posted at: {{ $forum->created_at->format('d M y h:i:s')}}</div><br>
                 <div>Description: </div>
                 <div>{{ $forum->description }}</div>
@@ -29,7 +35,12 @@
             @else
                 @foreach($threads as $thread)
                     <div class="panel panel-default">
-                        <a href="{{ route('users.show', ['id' => $thread->user->id]) }}">{{ $thread->user->name }}</a><br>
+                        @guest
+                        {{ $thread->user->name }}
+                        @else
+                        <a href="{{ route('users.show', ['id' => $thread->user->id]) }}">{{ $thread->user->name }}</a>
+                        @endguest
+                        <br>
                         {{ $thread->user->role->name }}<br>
                         {{ $thread->created_at }}<br>
                         {{ $thread->content }}<br>

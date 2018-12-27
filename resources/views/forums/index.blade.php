@@ -30,6 +30,8 @@
                     </div>
                 </form>
 
+                <p style="margin-left: 1%">Forum Search Results With <b>'{{ request()->get('search') }}' </b> Keyword(s): </p>
+
                 @foreach($forums as $forum)
                 <div class="panel-body">
                     <a href="{{ route('forums.show', $forum->id) }}">{{$forum->title}}</a> <button>{{$forum->forum_status->name}}</button><br>

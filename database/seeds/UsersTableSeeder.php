@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
     	$faker = Faker::create();
-    	$gender = $faker->randomElement(['male', 'female']);
+    	$gender = $faker->randomElement(['Male', 'Female']);
     	for($i=0; $i<2; $i++){
 	        DB::table('users')->insert([
 	        	[

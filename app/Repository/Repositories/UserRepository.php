@@ -54,7 +54,7 @@ class UserRepository implements Repository
     public function create(array $data)
     {
         return User::create([
-            'role_id' => userRole(),
+            'role_id' => isset($data['role_id']) ? $data['role_id'] : memberRole(),
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -83,6 +83,7 @@ class UserRepository implements Repository
         return User::where('id', $id)
             ->update([
                 'name' => $data['name'],
+                'role_id' => isset($data['role_id']) ? $data['role_id'] : memberRole(),
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'phone' => $data['phone'],

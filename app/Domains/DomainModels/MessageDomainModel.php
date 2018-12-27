@@ -56,7 +56,7 @@ Class MessageDomainModel extends DomainModel{
      public static function createMessageFromArray(array $data)
     {
         $messageRepository = new MessageRepository();
-        return $messageRepository->create($data);
+        $messageRepository->create($data);
     }
 
 	/**

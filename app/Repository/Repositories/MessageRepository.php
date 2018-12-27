@@ -55,8 +55,6 @@ class MessageRepository implements Repository
         $message->updated_at = date('Y-m-d H:i:s');
 
         $message->save();
-
-        return $message();
     }
 
     /**

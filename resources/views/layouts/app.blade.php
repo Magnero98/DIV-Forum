@@ -22,6 +22,9 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <label class="pull-right">{{ date_format(new DateTime(), 'd-m-Y H:i:s') }}</label>
+            </div>
             <div class="container">
                 <div class="navbar-header">
 
@@ -34,22 +37,39 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        dIV Forum
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        dIV-Forum
                     </a>
-
-                    @guest
-                    @else
-                    <a class="navbar-brand" href="{{ route('myForum') }}">
-                        My Forum
-                    </a>
-                    @endguest
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+
+                        @roles('Admin')
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Master <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('users.index') }}">User Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Forum Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Category Page</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endroles
+
+                        @roles(['User', 'Admin'])
+                            <li><a href="{{ route('login') }}">My Forum</a></li>
+                        @endroles
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,27 +79,31 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li class="nav">
+                                <a href="{{route('users.show', ['id' => authUserDomain()->getId()])}}">
+                                    <span class="fa fa-user-circle" style="font-size: 20px; padding-right: 5px"></span> {{ authUserDomain()->getName() }}
+                                </a>
+                            </li>
+                            <li class="nav">
+                                <a href="{{route('inbox')}}">Inbox</a>
+                            </li>
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ App\Domains\DomainModels\UserDomainModel::getAuthUser()->getName() }} <span class="caret"></span>
+                                    <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('inbox') }}">
-                                            Inbox
-                                        </a>
                                     </li>
                                 </ul>
                             </li>

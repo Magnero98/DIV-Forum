@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware\userPageAuthorization;
+namespace App\Http\Middleware\UserPageAuthorization;
 
 use Closure;
 

@@ -59,8 +59,10 @@
                 @endroles
             </div>
         </div>
+        @if(!isAuthUserProfile($user->id))
         <div class="container-fluid">
             <form action="{{ route('messages.store') }}" method="POST">
+                {{ csrf_field() }}
                 <label>Message</label>
                 <br>
                 <textarea rows="3" name="content"></textarea>
@@ -68,5 +70,6 @@
                 <button type="submit">Send</button>
             </form>
         </div>
+        @endif
     </div>
 @endsection

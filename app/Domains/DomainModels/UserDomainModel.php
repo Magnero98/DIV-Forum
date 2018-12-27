@@ -327,6 +327,7 @@ class UserDomainModel extends DomainModel
         return (new UserRepository())->find($id);
     }
 
+
     /**
      * Add new user to the database and move user picture to public directory
      * @author Yansen
@@ -344,7 +345,9 @@ class UserDomainModel extends DomainModel
 
 
     /**
-     * Save updated user to the database
+     * Remove old profile picture from server
+     * Add new uploaded profile picture to server
+     * and Save updated user to the database
      * @author Yansen
      *
      * @param array $data
@@ -352,6 +355,12 @@ class UserDomainModel extends DomainModel
      */
     public static function editUser(array $data, $id)
     {
+        $user = self::findUser($id);
+        ProfilePictureDomainModel::delete($user->profile_picture);
+
+        $profilePicture = ProfilePictureDomainModel::createFromFile($data['picture']);
+        $data['picture'] = $profilePicture->getFileName();
+
         return (new UserRepository())->update($data, $id);
     }
 
@@ -365,6 +374,9 @@ class UserDomainModel extends DomainModel
      */
     public static function deleteUser($userId)
     {
+        $user = self::findUser($userId);
+        ProfilePictureDomainModel::delete($user->profile_picture);
+
         return (new UserRepository())->delete($userId);
     }
 

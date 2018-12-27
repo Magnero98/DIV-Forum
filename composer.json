@@ -19,8 +19,10 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/UserDomainHelper.php",
-            "app/Helpers/RoleDomainHelper.php",
+            "app/Helpers/UserHelper.php",
+            "app/Helpers/RoleHelper.php",
+            "app/Helpers/ThreadHelper.php",
+            "app/Helpers/PopularityHelper.php",
             "app/Helpers/BladeHelper.php"
         ],
         "classmap": [

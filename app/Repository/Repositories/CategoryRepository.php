@@ -27,7 +27,8 @@ Class CategoryRepository implements Repository{
      */
     public function find($id)
     {
-        // TODO: Implement find() method.
+        $category = Category::find($id);
+        return $category;
     }
 
     /**
@@ -35,23 +36,30 @@ Class CategoryRepository implements Repository{
      * @author Alvent
      *
      * @param array $data
-     * @return Illuminate\Database\Eloquent\Model
      */
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        $category = new Category();
+        $category->name = $data['name'];
+        $category->created_at = date('Y-m-d H:i:s');
+        $category->updated_at = date('Y-m-d H:i:s');
+
+        $category->save();
     }
 
     /**
      * Update data with specified id inside Database with updated model
      * @author Alvent
-     *
      * @param array $data
+     * @param $id
      * @return Boolean
      */
-    public function update(array $data)
+    public function update(array $data, $id)
     {
-        // TODO: Implement update() method.
+        $category = Category::find($id); 
+        $category->name = $data['name']; 
+
+        $category->save();
     }
 
     /**
@@ -63,6 +71,7 @@ Class CategoryRepository implements Repository{
      */
     public function delete($id)
     {
-
+        $category = Category::find($id);
+        $category->delete();
     }
 }

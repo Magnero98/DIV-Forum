@@ -36,4 +36,12 @@ class Forum extends Model
     public function forum_status(){
         return $this->belongsTo('App\Repository\DataModels\Forum_Status');
     }
+
+    /**
+    * Create eloquent, Each forum is belongs to 1 user
+    * @author Alvent 
+    */
+    public function user(){
+        return $this->belongsTo('App\Repository\DataModels\User');
+    }
 }

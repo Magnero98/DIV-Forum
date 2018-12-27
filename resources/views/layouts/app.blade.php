@@ -58,10 +58,10 @@
                                         <a href="{{ route('users.index') }}">User Page</a>
                                     </li>
                                     <li>
-                                        <a href="#">Forum Page</a>
+                                        <a href="{{ route('masterForum')}}">Master Forum</a>
                                     </li>
                                     <li>
-                                        <a href="#">Category Page</a>
+                                        <a href="{{ route('categories.index')}}">Master Category</a>
                                     </li>
                                 </ul>
                             </li>
@@ -85,7 +85,7 @@
                                 </a>
                             </li>
                             <li class="nav">
-                                <a href="{{route('inbox')}}">Inbox</a>
+                                <a href="{{route('messages.index')}}">Inbox</a>
                             </li>
 
                             <li class="dropdown">

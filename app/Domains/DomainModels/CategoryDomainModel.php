@@ -33,6 +33,53 @@ Class CategoryDomainModel extends DomainModel{
 		$categories = $categoryRepository->all();
 		return $categories;
 	}
+
+	/**
+	* Create new category from array data   
+	* @author Alvent 
+	* @param array $data
+	*/
+	public static function createCategoryFromArray(array $data){
+		$categoryRepository = new CategoryRepository();
+		$categoryRepository = $categoryRepository->create($data);
+	}
+
+	/**
+	* delete specified category from DB     
+	* @author Alvent 
+	* @param $id
+	*/
+
+	public static function deleteCategory($id){
+		$categoryRepository = new CategoryRepository();
+		$categoryRepository->delete($id);
+	}
+
+
+	/**
+	* get specified category from DB     
+	* @author Alvent 
+	* @param $id
+	* @return Repository/DataModels/Category
+	*/
+
+	public static function findCategory($id){
+		$categoryRepository = new CategoryRepository();
+		return $categoryRepository->find($id);
+	}
+
+	/**
+	* update category from array $data    
+	* @author Alvent 
+	* @param $id
+	* @return Repository/DataModels/Category
+	*/
+	public static function updateCategoryFromArray(array $data, $id){
+		$categoryRepository = new CategoryRepository();
+        $categoryRepository->update($data, $id);
+	}
+
+
 }
 
 

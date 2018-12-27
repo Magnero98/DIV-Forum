@@ -90,9 +90,9 @@ Class MessageDomainModel extends DomainModel{
 	* @return  Collection of Repository/DataModels/Message
 	*/
 
-    public static function showMessage($id){
+    public static function showMessage($perPage, $id){
         $messageRepository = new MessageRepository();
-    	$messages = $messageRepository->showMessage($id);
+    	$messages = $messageRepository->all($perPage, $id);
     	return $messages;
     }
 

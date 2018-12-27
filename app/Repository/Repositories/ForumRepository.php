@@ -16,9 +16,13 @@ Class ForumRepository implements Repository{
      * @param Integer $perPage = 5
      * @return Collection of Illuminate\Database\Eloquent\Model
      */
-    public function all($perPage = 5)
+    public function all($perPage = 5, $search='')
     {
-        $forums = Forum::orderBy('created_at','desc')->paginate($perPage);
+        $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
+        {
+            $q->where('name', 'like', '%'.$search.'%');
+        })->orderBy('forums.created_at','desc')->paginate($perPage)->appends(['search' => $search]);
+
         return $forums;
     }
 
@@ -58,7 +62,7 @@ Class ForumRepository implements Repository{
     }
 
     /**
-     * Update data with specified id inside Database with updated model
+     * Update forum with specified id inside Database from array data
      * @author Alvent
      * @param $id
      * @param array $data
@@ -85,18 +89,6 @@ Class ForumRepository implements Repository{
         $forum->save();
     }
 
-
-    /**
-     * Update data with specified id inside Database with updated model
-     * @author Alvent
-     *
-     * @param array $data
-     * @return Boolean
-     */
-    public function update(array $data){
-
-    }
-
     /**
      * Delete data with specified id inside Database
      * @author Alvent
@@ -106,34 +98,8 @@ Class ForumRepository implements Repository{
      */
     public function delete($id)
     {
-
-    }
-
-
-      /**
-     * Get all message from specified user id
-     * @author Alvent
-     *
-     * @param Integer $id
-     * @return Boolean
-     */
-    public function showForum($id){
-
-    }
-
-    /**
-    * Display forum by title or name     
-    * @author Alvent 
-    * @param string $search
-    * @return Collection of Repository/DataModels/Forum
-    */
-    public function search($search){
-        $forums = Forum::where('title','LIKE','%'.$search.'%')->orWhereHas('category', function($q) use ($search)
-        {
-            $q->where('name', 'like', '%'.$search.'%');
-        })->orderBy('forums.created_at','desc')->paginate(5);
-
-        return $forums;
+        $forum = Forum::find($id);
+        $forum->delete();
     }
 
     /**

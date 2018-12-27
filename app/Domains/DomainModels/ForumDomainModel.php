@@ -35,19 +35,8 @@ Class ForumDomainModel extends DomainModel{
 	protected function setTitle($title){ $this->title = $title; return $this; }
 	protected function setDescription($description){ $this->description = $description; return $this; }
 
-	/**
-     * Add new Forum to the database
-     * @author Alvent
-     *
-     * @return App\Repository\DataModels\Forum
-     */
-    public function addForum()
-    {
-
-    }
-
     /**
-     * Factory Method to create ForumDomainModel from array of Data
+     * Create new forum to the database from array data 
      * @author Alvent
      *
      * @param array $data
@@ -102,7 +91,8 @@ Class ForumDomainModel extends DomainModel{
     */
 
     public static function deleteForum($id){
-
+        $forumRepository = new ForumRepository(); 
+        $forumRepository->delete($id);
     }
 
     /**
@@ -112,9 +102,9 @@ Class ForumDomainModel extends DomainModel{
 	* @return Collection of Repository/DataModels/Forum
 	*/
 
-    public static function showAllForum(){
+    public static function showAllForum($perPage = 5, $search=''){
     	$forumRepository = new ForumRepository(); 
-        $forums = $forumRepository->all();
+        $forums = $forumRepository->all($perPage, $search);
         return $forums;
     }
 

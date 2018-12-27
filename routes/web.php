@@ -26,6 +26,8 @@ Route::middleware(['isLoggedIn'])->group(function(){
 
         Route::resource('/users', 'UserController')
             ->only(['index', 'create', 'store', 'destroy']);
+        Route::get('/masterForum', 'ForumController@masterForum')->name('masterForum');
+        Route::resource('categories', 'CategoryController')->except('show');
 
     });
 
@@ -41,7 +43,7 @@ Route::middleware(['isLoggedIn'])->group(function(){
     Route::get('/search', 'ForumController@searchForum')->name('search');
     Route::get('/myforum', 'ForumController@myForum')->name('myForum');
     Route::resource('/forums', 'ForumController')
-        ->except(['index', 'show']);
+        ->except(['show']);
     Route::post('/forums/{id}/updateStatus', 'ForumController@updateStatus');
 
 
@@ -55,7 +57,6 @@ Route::middleware(['isLoggedIn'])->group(function(){
 
     Route::resource('/messages', 'MessageController')
         ->only(['index', 'store', 'destroy']);
-    Route::get('/messages', 'MessageController@showCurrentUserInbox')->name('inbox');
 
 
     // << =============== ROUTES TO POPULARITY =============== >>

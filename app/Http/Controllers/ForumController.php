@@ -19,10 +19,16 @@ class ForumController extends Controller
      * @author Alvent
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $forums = ForumDomainModel::showAllForum();
+
+    public function index(Request $request)
+    {   
+        $forums = ForumDomainModel::showAllForum(5, $request->search);
         return view('forums.index', ["forums" => $forums]);
+    }
+
+    public function masterForum(){
+        $forums = ForumDomainModel::showAllForum(10);
+        return view('forums.admins.index', ["forums" => $forums]);
     }
 
     /**
@@ -135,32 +141,20 @@ class ForumController extends Controller
     public function updateStatus($id){
         ForumDomainModel::updateStatus($id);
 
-        return redirect()->route('myForum');
+        return back();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified forum from database.
      * @author Alvent
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        ForumDomainModel::deleteForum($id);
+        return back();
     }
-
-    /**
-    * Search forum by title and category name 
-    * @author Alvent 
-    * @param \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function searchForum(Request $request){
-        $search = $request->get('search');
-        $forums = ForumDomainModel::searchForum($search);
-        $forums->appends($request->only('search'));
-        return view('forums.index', ["forums" => $forums]); 
-    } 
 
     /**
     * show all forum owned 

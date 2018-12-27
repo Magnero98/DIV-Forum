@@ -16,7 +16,7 @@ class RedirectIfUser
      */
     public function handle($request, Closure $next)
     {
-        if(authUserDomain()->getRoleId() != userRole())
+        if(authUserDomain()->getRoleId() != memberRole())
             abort(404, 'Page not found');
 
         return $next($request);

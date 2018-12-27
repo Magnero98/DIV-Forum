@@ -67,7 +67,7 @@
                             </li>
                         @endroles
 
-                        @roles(['User', 'Admin'])
+                        @roles(['Member', 'Admin'])
                             <li><a href="{{ route('myForum') }}">My Forum</a></li>
                         @endroles
                     </ul>

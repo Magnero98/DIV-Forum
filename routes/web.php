@@ -13,12 +13,6 @@
 
 Auth::routes();
 
-// << =============== ROUTES TO FORUM =============== >>
-
-Route::get('/', 'ForumController@index')->name('home');
-Route::resource('/forums', 'ForumController')
-    ->only(['show']);
-
 
 // << =============== ALL ROUTES INSIDE WOULD CALL isLoggedIn MIDDLEWARE =============== >>
 
@@ -39,7 +33,7 @@ Route::middleware(['isLoggedIn'])->group(function(){
     // << =============== ROUTES TO USER =============== >>
 
     Route::resource('/users', 'UserController')
-        ->except(['index', 'create', 'store', 'destroy']);
+        ->except(['index', 'show', 'create', 'store', 'destroy']);
 
 
     // << =============== ROUTES TO FORUM =============== >>
@@ -74,3 +68,15 @@ Route::middleware(['isLoggedIn'])->group(function(){
     });
 
 });
+
+// << =============== ROUTES TO FORUM =============== >>
+
+Route::get('/', 'ForumController@index')->name('home');
+Route::resource('/forums', 'ForumController')
+    ->only(['show']);
+
+
+// << =============== ROUTES TO USER =============== >>
+
+Route::resource('/users', 'UserController')
+    ->only(['show']);

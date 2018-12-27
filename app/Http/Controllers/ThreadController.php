@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use App\Domains\DomainModels\ThreadDomainModel;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
+    /**
+     * UserDomainModel Constructor
+     * @author Yansen
+     */
+    public function __construct()
+    {
+        $this->middleware(
+            'validateThreadData',
+            ['only' => ['store', 'update']]);
+    }
+
 
     /**
      * Store a newly created resource in storage.

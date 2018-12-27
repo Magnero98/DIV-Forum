@@ -14,11 +14,11 @@ if(!function_exists('adminRole'))
     }
 }
 
-if(!function_exists('userRole'))
+if(!function_exists('memberRole'))
 {
-    function userRole()
+    function memberRole()
     {
-        return \App\Domains\DomainModels\UserRoleEnumeration::User;
+        return \App\Domains\DomainModels\UserRoleEnumeration::Member;
     }
 }
 

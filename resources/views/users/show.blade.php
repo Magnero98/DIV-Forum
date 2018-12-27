@@ -38,18 +38,18 @@
                 </div>
             </div>
             <div class="col-md-2">
-                @roles(['User', 'Admin'])
+                @roles(['Member', 'Admin'])
                     @if(isAuthUserProfile($user->id))
                         <a href="{{ route('users.edit', ['id' => $user->id]) }}">Edit</a>
                     @else
                         <div>
                             <label>Give Popularity</label>
                             @if(getUserPopularityVote($user->id) == "Good")
-                                <a class="btn btn-default" disabled href="{{ route('popularities.good', ['userId' => $user->id]) }}">+</a>
+                                <a class="btn btn-default" disabled>+</a>
                                 <a class="btn btn-default" href="{{ route('popularities.bad', ['userId' => $user->id]) }}">-</a>
                             @elseif(getUserPopularityVote($user->id) == "Bad")
                                 <a class="btn btn-default" href="{{ route('popularities.good', ['userId' => $user->id]) }}">+</a>
-                                <a class="btn btn-default" disabled href="{{ route('popularities.bad', ['userId' => $user->id]) }}">-</a>
+                                <a class="btn btn-default" disabled>-</a>
                             @else
                                 <a class="btn btn-default" href="{{ route('popularities.good', ['userId' => $user->id]) }}">+</a>
                                 <a class="btn btn-default" href="{{ route('popularities.bad', ['userId' => $user->id]) }}">-</a>

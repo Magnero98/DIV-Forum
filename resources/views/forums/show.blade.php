@@ -34,7 +34,7 @@
                         {{ $thread->created_at }}<br>
                         {{ $thread->content }}<br>
 
-                        @roles(['User', 'Admin'])
+                        @roles(['Member', 'Admin'])
                             @if(isAuthUserThread($thread->id))
                                 <a href="{{ route('threads.edit', ['thread' => $thread]) }}">Update</a>
                                 <form action="{{ route('threads.update', ['id' => $thread->id]) }}" method="POST">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="container-fluid">
-            @roles(['User','Admin'])
+            @roles(['Member','Admin'])
                 @if($forum->forum_status->name != 'Closed')
                     <form method="POST" action="{{ route('threads.store') }}">
                         {{ csrf_field() }}

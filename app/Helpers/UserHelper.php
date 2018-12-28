@@ -18,6 +18,7 @@ if(!function_exists('isAuthUserProfile'))
 {
     function isAuthUserProfile($userId)
     {
+        if (authUserDomain() == null) return false;
         return (authUserDomain()->getId() == $userId);
     }
 }

@@ -109,10 +109,10 @@
 
                             <div class="col-md-6 radio">
                                 <label>
-                                    <input type="radio" name="gender" value="Male" required checked>Male
+                                    <input type="radio" name="gender" value="Male" required {{ old('gender') == 'Male' ? 'checked' : '' }}>Male
                                 </label>
                                 <label>
-                                    <input type="radio" name="gender" value="Female" required>Female
+                                    <input type="radio" name="gender" value="Female" required {{ old('gender') == 'Female' ? 'checked' : '' }}>Female
                                 </label>
                             </div>
 

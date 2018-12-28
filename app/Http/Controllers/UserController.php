@@ -93,7 +93,10 @@ class UserController extends Controller
     {
         UserDomainModel::editUser($request->all(), $id);
 
-        return redirect(route('users.index'));
+        if(authUserDomain()->getRoleId() == memberRole())
+            return redirect(route('users.show', ['id' => authUserDomain()->getId()]));
+        else if(authUserDomain()->getRoleId() == adminRole())
+            return redirect(route('users.index'));
     }
 
     /**

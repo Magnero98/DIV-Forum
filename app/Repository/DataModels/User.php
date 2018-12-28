@@ -73,7 +73,7 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function messages(){
-        return $this->hasMany('App\Repository\DataModels\Message', 'receiver_id');
+        return $this->hasMany('App\Repository\DataModels\Message');
     }
 
 
@@ -93,6 +93,6 @@ class User extends Authenticatable
     * @author Alvent 
     */
     public function forums(){
-        return $this->hasMany('App\Repository\DataModels\Forum', 'user_id');
+        return $this->hasMany('App\Repository\DataModels\Forum');
     }
 }

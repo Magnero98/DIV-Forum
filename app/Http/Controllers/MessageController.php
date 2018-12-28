@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Input;
 
 class MessageController extends Controller
 {
+
+    /**
+     * ForumController Constructor
+     * @author Alvent
+     */
+    public function __construct()
+    {
+        $this->middleware(
+            'validateMessageData',
+            ['only' => ['store']]);
+    }
+
     /**
      * Display the specified message according to user id.
      * @author Alvent
@@ -36,31 +48,10 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validator($request->all());
-
-        if($validator->fails()){
-            return back()->withErrors($validator)->withInput(Input::all());
-        }
-
         MessageDomainModel::createMessageFromArray($request->all());
 
         return back();
     }
-
-    /**
-     * Get a validator for creating message.
-     * @author Alvent
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-
-    protected function validator(array $data){
-        return Validator::make($data, [
-            'receiver_id' => 'required',
-            'content' => 'required',
-        ]);
-    }
-
 
     /**
      * Remove the specified message from db.

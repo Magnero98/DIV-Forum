@@ -19,11 +19,11 @@ class Message extends Model
     ];
 
     /**
-     * Eloquent: every message belongs to a user
+     * Eloquent: every message with receiver_id field belongs to a user
      * @author Alvent
      */
     public function user()
     {
-        return $this->belongsTo('App\Repository\DataModels\User', 'id');
+        return $this->belongsTo('App\Repository\DataModels\User', 'sender_id');
     }
 }

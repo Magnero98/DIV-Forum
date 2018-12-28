@@ -22,6 +22,6 @@ class Category extends Model
     */
     
     public function forums(){
-    	return $this->hasMany('App\Repository\DataModels\Forum','category_id');
+    	return $this->hasMany('App\Repository\DataModels\Forum');
     }
 }

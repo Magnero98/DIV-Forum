@@ -63,5 +63,7 @@ class Kernel extends HttpKernel
         'isLoggedIn' => \App\Http\Middleware\UserPageAuthorization\RedirectIfLoggedIn::class,
         'validateUserData' => \App\Http\Middleware\User\ValidateUserData::class,
         'validateThreadData' => \App\Http\Middleware\Thread\ValidateThreadData::class,
+        'validateForumData' => \App\Http\Middleware\Forum\ValidateForumData::class,
+        'validateMessageData' => \App\Http\Middleware\Message\ValidateMessageData::class,
     ];
 }

@@ -23,6 +23,6 @@ class Forum_Status extends Model
     */
 
     public function forums(){
-        return $this->hasMany('App\Repository\DataModels\Forum', 'forum_status_id');
+        return $this->hasMany('App\Repository\DataModels\Forum');
     }
 }

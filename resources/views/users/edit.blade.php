@@ -25,21 +25,23 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Role</label>
+                            @roles('Admin')
+                                <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
+                                    <label for="name" class="col-md-4 control-label">Role</label>
 
-                                <div class="col-md-6">
-                                    <select class="form-control" name="role_id" required>
-                                        <option value="1" {{ old('role_id') == adminRole() ? 'selected' : $user->role_id }}>Admin</option>
-                                        <option value="2" {{ old('role_id') == memberRole() ? 'selected' : $user->role_id }}>Member</option>
-                                    </select>
-                                    @if ($errors->has('role_id'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('role_id') }}</strong>
-                                    </span>
-                                    @endif
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="role_id" required>
+                                            <option value="1" {{ old('role_id') == adminRole() ? 'selected' : $user->role_id }}>Admin</option>
+                                            <option value="2" {{ old('role_id') == memberRole() ? 'selected' : $user->role_id }}>Member</option>
+                                        </select>
+                                        @if ($errors->has('role_id'))
+                                            <span class="help-block">
+                                            <strong>{{ $errors->first('role_id') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
+                            @endroles
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>

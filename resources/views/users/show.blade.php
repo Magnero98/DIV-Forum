@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="jumbotron row">
             <div class="col-md-2">
-                <img src="{{ asset('uploads/profile_pictures' . $user->profile_picture) }}">
+                <img width="120" src="{{ asset('uploads\\profile_pictures\\' . $user->profile_picture) }}">
             </div>
             <div class="col-md-8">
                 <div>
@@ -59,25 +59,27 @@
                 @endroles
             </div>
         </div>
-        @if(!isAuthUserProfile($user->id))
-        <div class="container-fluid">
-            <form action="{{ route('messages.store') }}" method="POST">
-                {{ csrf_field() }}
-                <label>Message</label>
-                <br>
-                <input type="hidden" name="receiver_id" value="{{$user->id}}">
-                <input type="hidden" name="sender_id" value="{{ authUserDomain()->getId() }}">
-                <textarea rows="3" name="content"></textarea>
+        @roles(['Member', 'Admin'])
+            @if(!isAuthUserProfile($user->id))
+            <div class="container-fluid">
+                <form action="{{ route('messages.store') }}" method="POST">
+                    {{ csrf_field() }}
+                    <label>Message</label>
+                    <br>
+                    <input type="hidden" name="receiver_id" value="{{$user->id}}">
+                    <input type="hidden" name="sender_id" value="{{ authUserDomain()->getId() }}">
+                    <textarea rows="3" name="content" required></textarea>
 
-                @if ($errors->has('content'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('content') }}</strong>
-                    </span>
-                @endif
-                <br>
-                <button type="submit">Send</button>
-            </form>
-        </div>
-        @endif
+                    @if ($errors->has('content'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('content') }}</strong>
+                        </span>
+                    @endif
+                    <br>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+            @endif
+        @endroles
     </div>
 @endsection

@@ -8,12 +8,21 @@ use App\Http\Controllers\Controller;
 use App\Domains\DomainModels\ForumDomainModel;
 use App\Domains\DomainModels\CategoryDomainModel;
 use App\Domains\DomainModels\UserDomainModel;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
 use App\Repository\DataModels\Forum;
 
 class ForumController extends Controller
 {
+
+    /**
+     * ForumController Constructor
+     * @author Alvent
+     */
+    public function __construct()
+    {
+        $this->middleware(
+            'validateForumData',
+            ['only' => ['store', 'update']]);
+    }
     /**
      * Display a listing of the forum.
      * @author Alvent
@@ -26,6 +35,11 @@ class ForumController extends Controller
         return view('forums.index', ["forums" => $forums]);
     }
 
+    /**
+    * Display all forum for Admin
+    * @author Alvent
+    * @return \Illuminate\Http\Response 
+    */
     public function masterForum(){
         $forums = ForumDomainModel::showAllForum(10);
         return view('forums.admins.index', ["forums" => $forums]);
@@ -55,30 +69,9 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-            
-        $validator = $this->validator($request->all());
-
-        if($validator->fails()){
-            return redirect()->route('forums.create')->withErrors($validator)->withInput(Input::all());
-        }
-
         ForumDomainModel::createForumFromArray($request->all());
 
         return redirect()->route('forums.index');
-    }
-
-    /**
-     * Get a validator for create forum request.
-     * @author Alvent
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-
-    protected function validator(array $data){
-        return Validator::make($data, [
-            'name' => 'required',
-            'category' => 'required',
-        ]);
     }
 
     /**
@@ -121,11 +114,6 @@ class ForumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = $this->validator($request->all());
-        if($validator->fails()){
-           return redirect()->route('forums.edit', $id)->withErrors($validator);
-        }
-
         ForumDomainModel::updateForumFromArray($request->all(), $id);
 
         return redirect()->route('myForum');

@@ -5,14 +5,14 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
+                    <div class="panel-heading"><span class="text-primary lead"><b>User Data</b></span></div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                                <label for="name" class="col-md-4 control-label"><span class="star">* </span>Name</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <label for="email" class="col-md-4 control-label"><span class="star">* </span>E-Mail Address</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -56,7 +56,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label"><span class="star">* </span>Password</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}" required>
@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                                <label for="password-confirm" class="col-md-4 control-label"><span class="star">* </span>Confirm Password</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
-                                <label for="phone" class="col-md-4 control-label">Phone</label>
+                                <label for="phone" class="col-md-4 control-label"><span class="star">* </span>Phone</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
@@ -107,7 +107,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                <label for="birthday" class="col-md-4 control-label">Birthday</label>
+                                <label for="birthday" class="col-md-4 control-label"><span class="star">* </span>Birthday</label>
 
                                 <div class="col-md-6">
                                     <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
@@ -121,7 +121,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('gender') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Gender</label>
+                                <label class="col-md-4 control-label"><span class="star">* </span>Gender</label>
 
                                 <div class="col-md-6 radio">
                                     <label>
@@ -153,7 +153,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" style="padding-top: 20px">
+                            <div class="form-group  form-submit">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         Add

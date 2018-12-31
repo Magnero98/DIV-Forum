@@ -1,55 +1,28 @@
 /*home*/
 .home-pad{
+    margin-top: 3vh;
     padding: 0.8vh;
 }
 
 .btn-create{
-    bottom: 2vh;
-    right: 2vh;
+    right: 20px;
+    bottom: 20px;
     position: fixed;
-    width: 70px;
-    height: 70px;
-    padding: 10px 16px;
+    width: 50px;
+    height: 50px;
+    padding: 10px 10px;
     font-size: 2vh;
     line-height: 1.33;
     border-radius: 35px;
-    box-shadow: 0 1vw 1vh rgba(0,0,0,.25);
+    box-shadow: 5px 5px 10px rgba(0,0,0,.4);
+    z-index: 1;
 }
 
-/*forum*/
-.form-submit{
-    padding-top: 20px;
+.popularity-box
+{
+    min-width: 120px;
 }
 
-.content-group{
-    height: 5vh;
-    vertical-align: middle;
-    margin-top: 1vh;
-}
-
-.well-pad{
-    padding: 2vh;
-}
-
-.btn-search-forum{
-    height: 3.7vh;
-}
-
-.btn-forum-thread{
-    margin-left: 0.5vw;
-}
-
-.btn-send{
-    width: 2.2vh;
-}
-
-.forumpeople{
-    margin-top: 1vh;
-}
-
-.footer-thread{
-    height: 5vh;
-}
 
 
 /*user*/
@@ -58,47 +31,12 @@
     color: red;
 }
 
-.img-user{
-    width:100px;
-    height:100px;
-}
-
-.vertic-body{
-    padding: 8px;
-    line-height: 1.6;
-    vertical-align: middle;
-    border-top: 1px solid #ddd;
-}
-
-.btn-on-list{
-    height: 3vh;
-}
-
-.btn-sz{
-    font-size: 2vh;
-}
-
-.btn-sz-forum{
-    height: 3.5vh;
-}
 
 /*profile*/
 .padd-prof{
     padding-top: 1vh;
 }
 
-.panel-profile{
-    border-style:groove;
-    height: 29.5vh;
-}
-
-.panel-content{
-    border-style:groove;
-    height: 27vh;
-}
-
 .img-profile{
-    width: 10vw;
-    height: 27vh;
-    position: absolute;
+    width: 100%;
 }

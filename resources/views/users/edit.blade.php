@@ -5,14 +5,14 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
+                    <div class="panel-heading"><span class="text-primary lead"><b>User Data</b></span></div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('users.update', ['id' => $user->id]) }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                                <label for="name" class="col-md-4 control-label"><span class="star">* </span>Name</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') != null ? old('name') : $user->name }}" required autofocus>
@@ -26,25 +26,25 @@
                             </div>
 
                             @roles('Admin')
-                                <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
-                                    <label for="name" class="col-md-4 control-label">Role</label>
+                            <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
+                                <label for="name" class="col-md-4 control-label">Role</label>
 
-                                    <div class="col-md-6">
-                                        <select class="form-control" name="role_id" required>
-                                            <option value="1" {{ old('role_id') == adminRole() ? 'selected' : $user->role_id }}>Admin</option>
-                                            <option value="2" {{ old('role_id') == memberRole() ? 'selected' : $user->role_id }}>Member</option>
-                                        </select>
-                                        @if ($errors->has('role_id'))
-                                            <span class="help-block">
+                                <div class="col-md-6">
+                                    <select class="form-control" name="role_id" required>
+                                        <option value="1" {{ old('role_id') == adminRole() ? 'selected' : $user->role_id }}>Admin</option>
+                                        <option value="2" {{ old('role_id') == memberRole() ? 'selected' : $user->role_id }}>Member</option>
+                                    </select>
+                                    @if ($errors->has('role_id'))
+                                        <span class="help-block">
                                             <strong>{{ $errors->first('role_id') }}</strong>
                                         </span>
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
+                            </div>
                             @endroles
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <label for="email" class="col-md-4 control-label"><span class="star">* </span>E-Mail Address</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') != null ? old('email') : $user->email }}" required>
@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label"><span class="star">* </span>Password</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" value="{{ old('password') != null ? old('password') : $user->password }}" required>
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                                <label for="password-confirm" class="col-md-4 control-label"><span class="star">* </span>Confirm Password</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') != null ? old('password_confirmation') : $user->password }}" required>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
-                                <label for="phone" class="col-md-4 control-label">Phone</label>
+                                <label for="phone" class="col-md-4 control-label"><span class="star">* </span>Phone</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') != null ? old('phone') : $user->phone }}" required>
@@ -109,7 +109,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                <label for="birthday" class="col-md-4 control-label">Birthday</label>
+                                <label for="birthday" class="col-md-4 control-label"><span class="star">* </span>Birthday</label>
 
                                 <div class="col-md-6">
                                     <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') != null ? old('birthday') : $user->birthday }}" required>
@@ -123,7 +123,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('gender') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Gender</label>
+                                <label class="col-md-4 control-label"><span class="star">* </span>Gender</label>
 
                                 <div class="col-md-6 radio">
                                     <label>
@@ -157,7 +157,7 @@
 
                             <input type="hidden" name="_method" value="PUT">
 
-                            <div class="form-group" style="padding-top: 20px">
+                            <div class="form-group form-submit">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
                                         Update

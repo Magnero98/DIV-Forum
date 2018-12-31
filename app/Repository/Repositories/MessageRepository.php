@@ -23,7 +23,9 @@ class MessageRepository implements Repository
      */
     public function all($perPage = 10, $id)
     {
-        $messages = Message::where('receiver_id','=',$id)->paginate($perPage);
+        $messages = Message::where('receiver_id','=',$id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate($perPage);
         return $messages;
     }
 

@@ -1,33 +1,31 @@
 @extends ('layouts.app')
 
 @section('content')
-
-    @if(!$messages->isEmpty())
-    <table style="margin:auto">
-        <tr>
-            <th width="20%">Name</th>
-            <th width="20%">Created At</th>
-            <th width="20%">Content</th>
-            <th width="20%">Delete</th>
-        </tr>
-        @foreach($messages as $message)
-            <tr>
-                <td>{{$message->user->name}}</td>
-                <td>{{$message->created_at->format('l, d-M-Y H:i:s')}}</td>
-                <td>{{$message->content}}</td>
-                <td>
-                    <form action="{{route('messages.destroy', $message->id)}}" method="post">
-                        {{csrf_field()}}
-                        <input type="hidden" name="_method" value="delete"/>
-                        <button>Delete</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-
-        {{ $messages->links() }}
-    </table>
-    @else
-    <h1>There is no message yet...</h1>
-    @endif
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                @if(!$messages->isEmpty())
+                    @foreach($messages as $message)
+                        <div class="well">
+                            <div>
+                                <label class="text-primary>"><a href="{{ route('users.show', ['id' => $message->user->id ]) }}">{{$message->user->name}}</a></label>
+                                <form class="pull-right" action="{{route('messages.destroy', $message->id)}}" method="post">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button class="btn btn-danger btn-sm pull-right" ><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                </form>
+                            </div>
+                            <div>
+                                {{$message->created_at->format('l, d-M-Y H:i:s')}}
+                            </div>
+                            <li class="list-group-item footer-thread">{{$message->content}}</li>
+                        </div>
+                    @endforeach
+                    {{ $messages->links() }}
+                @else
+                    <h1>There is no message yet...</h1>
+                @endif
+            </div>
+        </div>
+    </div>
 @endsection

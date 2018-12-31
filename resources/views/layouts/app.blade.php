@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -11,111 +12,112 @@
     <title>dIV Forum</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
 
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container-fluid">
-                <label class="pull-right">{{ date_format(new DateTime(), 'd-m-Y H:i:s') }}</label>
+<div id="app">
+    <nav class="navbar navbar-inverse ">
+        <div class="container">
+            <div class="navbar-header">
+
+              <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    dIV-Forum
+                </a>
             </div>
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        dIV-Forum
-                    </a>
-                </div>
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    @roles('Admin')
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                            Master <span class="fa fa-caret-down"></span>
+                        </a>
 
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-
-                        @roles('Admin')
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    Master <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('users.index') }}">User Page</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('masterForum')}}">Master Forum</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('categories.index')}}">Master Category</a>
-                                    </li>
-                                </ul>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('users.index') }}">User Page</a>
                             </li>
-                        @endroles
-
-                        @roles(['Member', 'Admin'])
-                            <li><a href="{{ route('myForum') }}">My Forum</a></li>
-                        @endroles
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="nav">
-                                <a href="{{route('users.show', ['id' => authUserDomain()->getId()])}}">
-                                    <span class="fa fa-user-circle" style="font-size: 20px; padding-right: 5px"></span> {{ authUserDomain()->getName() }}
-                                </a>
+                            <li>
+                                <a href="{{ route('masterForum')}}">Master Forum</a>
                             </li>
-                            <li class="nav">
-                                <a href="{{route('messages.index')}}">Inbox</a>
+                            <li>
+                                <a href="{{ route('categories.index')}}">Master Category</a>
                             </li>
+                        </ul>
+                    </li>
+                    @endroles
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    <span class="caret"></span>
-                                </a>
+                    @roles(['Member', 'Admin'])
+                    <li><a href="{{ route('myForum') }}">My Forum</a></li>
+                    @endroles
+                </ul>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @else
+                        <li class="nav">
+                            <a href="{{route('users.show', ['id' => authUserDomain()->getId()])}}">
+                                <img width="25px" height="25px" src="{{ asset('uploads\\profile_pictures\\' . authUserDomain()->getProfilePicture()->getFileName()) }}"> {{ authUserDomain()->getName() }}
+                            </a>
+                        </li>
+                        <li class="nav">
+                            <a href="{{route('messages.index')}}">Inbox</a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                <span class="fa fa-caret-square-o-down"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                        Logout
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+    @yield('content')
+</div>
 
-        @yield('content')
-    </div>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
